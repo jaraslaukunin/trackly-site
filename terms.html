@@ -50,6 +50,33 @@
       .doc-card { padding: 18px 16px 22px; }
       h1 { font-size: 22px; } h2 { font-size: 17px; }
     }
+		@media (max-width: 760px) {
+      .nav {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 10px 0 8px;
+        gap: 8px;
+      }
+      .doc-card {
+        padding: 16px 14px 18px;
+      }
+      h1 {
+        font-size: 20px;
+      }
+      h2 {
+        font-size: 16px;
+      }
+      body {
+        font-size: 14px;
+      }
+      .table-wrap {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+      table {
+        min-width: 480px;
+      }
+    }
   </style>
 </head>
 <body>
