@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <title>Статус Trackly</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Текущий статус работы сервиса Trackly и проверка Supabase health‑check." />
+  <style>
+    :root {
+      --bg: #f6f4ef;
+      --surface: rgba(255,255,255,.9);
+      --surface-strong: #ffffff;
+      --text: #1f1d1a;
+      --muted: #6e6a63;
+      --line: #ddd6ca;
+      --accent: #8458d6;
+      --ok: #16a34a;
+      --bad: #dc2626;
+      --radius: 24px;
+      --shadow: 0 18px 60px rgba(31,29,26,.08);
+      --content: 920px;
+    }
+
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+
+    body {
+      min-height: 100vh;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(132,88,214,.10), transparent 32%),
+        radial-gradient(circle at top right, rgba(132,88,214,.16), transparent 28%),
+        var(--bg);
+      display: flex;
+      justify-content: center;
+    }
+
+    main.page {
+      width: min(calc(100% - 32px), var(--content));
+      margin: 32px auto;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      color: var(--muted);
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.9);
+      border: 1px solid var(--line);
+    }
+    .back-link:hover {
+      color: var(--text);
+      border-color: #d1c6b4;
+    }
+
+    .top-badge {
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      color: var(--muted);
+      background: rgba(255,255,255,.9);
+    }
+
+    .hero {
+      background: var(--surface);
+      border-radius: var(--radius);
+      border: 1px solid rgba(255,255,255,.8);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(20px);
+      padding: 22px 24px 18px;
+      display: grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap: 18px;
+      align-items: center;
+    }
+
+    .hero-main h1 {
+      margin: 0;
+      font-size: clamp(26px, 4vw, 30px);
+      letter-spacing: -.03em;
+    }
+    .hero-main p {
+      margin: 8px 0 0;
+      color: var(--muted);
+      font-size: 14px;
+      max-width: 54ch;
+    }
+
+    .overall-status {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 8px;
+      font-size: 14px;
+    }
+
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.96);
+      border: 1px solid var(--line);
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      position: relative;
+    }
+    .dot::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      border: 0 solid transparent;
+      opacity: 0;
+    }
+
+    .dot-ok {
+      background: var(--ok);
+    }
+    .dot-ok::after {
+      border-color: rgba(22,163,74,.35);
+      animation: pulseOk 1.8s ease-out infinite;
+    }
+
+    .dot-bad {
+      background: var(--bad);
+    }
+    .dot-bad::after {
+      border-color: rgba(220,38,38,.40);
+      animation: pulseBad 1.6s ease-out infinite;
+    }
+
+    @keyframes pulseOk {
+      0% { transform: scale(1); opacity: .7; border-width: 0; }
+      70% { transform: scale(2.1); opacity: 0; border-width: 6px; }
+      100% { transform: scale(2.1); opacity: 0; border-width: 6px; }
+    }
+    @keyframes pulseBad {
+      0% { transform: scale(1); opacity: .8; border-width: 0; }
+      70% { transform: scale(2.2); opacity: 0; border-width: 7px; }
+      100% { transform: scale(2.2); opacity: 0; border-width: 7px; }
+    }
+
+    .overall-status small {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, .9fr);
+      gap: 16px;
+    }
+
+    .card {
+      background: var(--surface);
+      border-radius: var(--radius);
+      border: 1px solid rgba(255,255,255,.9);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(20px);
+      padding: 18px 20px 16px;
+    }
+
+    .card h2 {
+      margin: 0 0 6px;
+      font-size: 18px;
+      letter-spacing: -.02em;
+    }
+    .card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .components-list {
+      margin-top: 14px;
+      border-radius: 16px;
+      border: 1px solid #e1d9cb;
+      background: #fdfbf7;
+      padding: 8px 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .component {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      padding: 6px 4px;
+      border-radius: 12px;
+    }
+
+    .component-main {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .component-name {
+      font-size: 13px;
+    }
+    .component-desc {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .component-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .tag {
+      padding: 2px 7px;
+      border-radius: 999px;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: .14em;
+      border: 1px solid #e1d9cb;
+      color: var(--muted);
+      background: rgba(255,255,255,.9);
+    }
+
+    .recheck-btn {
+      margin-top: 12px;
+      width: 100%;
+      padding: 10px 16px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.9);
+      color: var(--text);
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: .18s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    .recheck-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      transform: translateY(-1px);
+    }
+    .recheck-btn:disabled {
+      opacity: .55;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .incidents {
+      margin-top: 12px;
+      border-radius: 16px;
+      border: 1px solid #e1d9cb;
+      background: #fffaf4;
+      padding: 10px 12px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .meta-list {
+      margin-top: 10px;
+      padding: 8px 10px;
+      border-radius: 14px;
+      border: 1px dashed #ddd3c4;
+      background: #fdfbf7;
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .meta-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 4px;
+    }
+    .meta-row:last-child { margin-bottom: 0; }
+
+    pre {
+      margin-top: 10px;
+      max-height: 260px;
+      overflow: auto;
+      font-size: 11px;
+      line-height: 1.4;
+      background: #f9f6f0;
+      border-radius: 14px;
+      border: 1px solid #e1d9cb;
+      padding: 9px 10px;
+      color: #6e6a63;
+    }
+
+    @media (max-width: 900px) {
+      .hero {
+        grid-template-columns: 1fr;
+        align-items: flex-start;
+      }
+      .overall-status {
+        align-items: flex-start;
+      }
+      .layout {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      main.page {
+        margin: 20px auto;
+      }
+      .hero, .card {
+        padding: 18px 16px 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <div class="top-bar">
+      <a href="./index.html" class="back-link">
+        <span>←</span>
+        <span>Вернуться на главную</span>
+      </a>
+      <span class="top-badge">Status · Trackly</span>
+    </div>
+
+    <section class="hero">
+      <div class="hero-main">
+        <h1>Текущий статус сервиса Trackly</h1>
+        <p>
+          Эта страница показывает состояние основных компонентов Trackly и результат
+          проверки health‑check функции в Supabase Edge Functions.
+        </p>
+      </div>
+
+      <aside class="overall-status">
+        <div id="overall-pill" class="status-pill">
+          <span id="overall-dot" class="dot dot-ok"></span>
+          <span id="overall-text">Проверяем статус…</span>
+        </div>
+        <small id="overall-meta">Запрос к статус‑функции ещё выполняется.</small>
+      </aside>
+    </section>
+
+    <section class="layout">
+      <article class="card">
+        <h2>Компоненты сервиса</h2>
+        <p>Основные части инфраструктуры Trackly.</p>
+
+        <div class="components-list">
+          <div class="component">
+            <div class="component-main">
+              <div class="component-name">Клиентские приложения Trackly</div>
+              <div class="component-desc">Приложения для macOS и Windows.</div>
+            </div>
+            <div class="component-status">
+              <span class="dot dot-ok"></span>
+              <span>Работает</span>
+            </div>
+          </div>
+
+          <div class="component" id="component-supabase">
+            <div class="component-main">
+              <div class="component-name">Supabase API и база данных</div>
+              <div class="component-desc">
+                Edge Functions, авторизация и чтение/запись данных.
+              </div>
+            </div>
+            <div class="component-status" id="component-supabase-status">
+              <span class="dot dot-ok" id="supabase-dot"></span>
+              <span id="supabase-label">Проверяем…</span>
+            </div>
+          </div>
+
+          <div class="component">
+            <div class="component-main">
+              <div class="component-name">Почтовая доставка Resend</div>
+              <div class="component-desc">Технические и экстренные уведомления.</div>
+            </div>
+            <div class="component-status">
+              <span class="dot dot-ok"></span>
+              <span>Работает</span>
+            </div>
+          </div>
+
+          <div class="component">
+            <div class="component-main">
+              <div class="component-name">Веб‑сайт и документация</div>
+              <div class="component-desc">tracklyapp.xyz и статические страницы.</div>
+            </div>
+            <div class="component-status">
+              <span class="dot dot-ok"></span>
+              <span>Работает</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="incidents">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">
+            <span>Недавние инциденты</span>
+            <span class="tag">30 дней</span>
+          </div>
+          <div>
+            За последние 30 дней инциденты не зарегистрированы (отчёты заполняются вручную).
+          </div>
+        </div>
+
+        <button class="recheck-btn" id="recheck-btn" onclick="recheck()">
+          Перепроверить статус
+        </button>
+      </article>
+
+      <aside class="card">
+        <h2>Детали health‑check</h2>
+        <p>
+          Ниже отображаются сырые данные, которые вернула Edge Function
+          <code>/status</code> в Supabase.
+        </p>
+
+        <div class="meta-list" id="meta">
+          <div class="meta-row">
+            <span>HTTP статус</span>
+            <span>…</span>
+          </div>
+          <div class="meta-row">
+            <span>Начато</span>
+            <span>…</span>
+          </div>
+          <div class="meta-row">
+            <span>Завершено</span>
+            <span>…</span>
+          </div>
+          <div class="meta-row">
+            <span>Регион функции</span>
+            <span>…</span>
+          </div>
+        </div>
+
+        <pre><code id="raw">Загружаем https://kiaobwhpghbmzjlfbybz.supabase.co/functions/v1/status…</code></pre>
+      </aside>
+        </section>
+
+    <footer style="
+      text-align: center;
+      padding: 14px 0 8px;
+      font-size: 13px;
+      color: var(--muted);
+      border-top: 1px solid var(--line);
+      margin-top: 6px;
+    ">
+      © 2026 Trackly · <a href="mailto:jaraslaukunin@gmail.com" style="color:var(--accent);">jaraslaukunin@gmail.com</a>
+    </footer>
+  </main>
+
+  <script>
+    const STATUS_URL = 'https://kiaobwhpghbmzjlfbybz.supabase.co/functions/v1/status';
+
+    function setOverall(ok, message, meta) {
+      const dot = document.getElementById('overall-dot');
+      const text = document.getElementById('overall-text');
+      const metaEl = document.getElementById('overall-meta');
+
+      dot.classList.remove('dot-ok', 'dot-bad');
+      dot.classList.add(ok ? 'dot-ok' : 'dot-bad');
+      text.textContent = message;
+      metaEl.textContent = meta;
+    }
+
+    function setSupabaseStatus(ok, label) {
+      const dot = document.getElementById('supabase-dot');
+      const span = document.getElementById('supabase-label');
+      if (!dot || !span) return;
+      dot.classList.remove('dot-ok', 'dot-bad');
+      dot.classList.add(ok ? 'dot-ok' : 'dot-bad');
+      span.textContent = label;
+    }
+
+    function setMetaView({ statusCode, startedAt, endedAt, region }) {
+      const meta = document.getElementById('meta');
+      meta.innerHTML = `
+        <div class="meta-row">
+          <span>HTTP статус</span>
+          <span>${statusCode ?? '—'}</span>
+        </div>
+        <div class="meta-row">
+          <span>Начато</span>
+          <span>${startedAt || '—'}</span>
+        </div>
+        <div class="meta-row">
+          <span>Завершено</span>
+          <span>${endedAt || '—'}</span>
+        </div>
+        <div class="meta-row">
+          <span>Регион функции</span>
+          <span>${region || '—'}</span>
+        </div>
+      `;
+    }
+
+    async function recheck() {
+      const btn = document.getElementById('recheck-btn');
+      if (!btn) return;
+      btn.disabled = true;
+      btn.textContent = 'Проверяем…';
+
+      // сбрасываем supabase-статус на «проверяем»
+      const dot = document.getElementById('supabase-dot');
+      const label = document.getElementById('supabase-label');
+      if (dot) { dot.classList.remove('dot-ok','dot-bad'); dot.classList.add('dot-ok'); }
+      if (label) label.textContent = 'Проверяем…';
+
+      await loadStatus();
+
+      btn.disabled = false;
+      btn.textContent = 'Перепроверить статус';
+    }
+
+    async function loadStatus() {
+      const raw = document.getElementById('raw');
+
+      try {
+        const res = await fetch(STATUS_URL, { cache: 'no-store' });
+        const text = await res.text();
+        raw.textContent = text;
+
+        let data = null;
+        try { data = JSON.parse(text); } catch (_) {}
+
+        const okFromBody = data && typeof data.ok === 'boolean' ? data.ok : res.ok;
+
+        setOverall(
+          okFromBody,
+          okFromBody ? 'Все основные системы Trackly работают штатно.' : 'Обнаружены проблемы в инфраструктуре Trackly.',
+          `Проверка через Edge Function /status (HTTP ${res.status}).`
+        );
+
+        const dbOk = !!(data && data.checks && data.checks.database && data.checks.database.ok);
+        const dbErr = data && data.checks && data.checks.database && data.checks.database.error;
+
+        setSupabaseStatus(
+          dbOk,
+          dbOk ? 'Работает' : (dbErr ? 'Ошибка' : 'Недоступно')
+        );
+
+        setMetaView({
+          statusCode: res.status,
+          startedAt: data && data.meta && data.meta.startedAt,
+          endedAt: data && data.meta && data.meta.endedAt,
+          region: data && data.meta && data.meta.region
+        });
+
+      } catch (e) {
+        setOverall(
+          false,
+          'Не удалось получить статус Trackly.',
+          'Проверьте подключение к сети или работу Supabase Functions.'
+        );
+        setSupabaseStatus(false, 'Нет ответа');
+        raw.textContent = String(e);
+        setMetaView({
+          statusCode: null,
+          startedAt: null,
+          endedAt: null,
+          region: null
+        });
+      }
+    }
+
+    loadStatus();
+  </script>
+</body>
+</html>

@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Trackly — мониторинг эпилепсии</title>
+  <meta name="description" content="Trackly — приложение для персонального мониторинга приступов, медикаментозной терапии, самочувствия и отчётов для врача." />
+  <style>
+    :root {
+      --bg: #f6f4ef;
+      --surface: rgba(255,255,255,.76);
+      --surface-strong: #ffffff;
+      --text: #1f1d1a;
+      --muted: #6e6a63;
+      --line: #ddd6ca;
+      --accent: #8458d6;
+      --accent-2: #6c55ff;
+      --shadow: 0 18px 60px rgba(31,29,26,.08);
+      --radius: 24px;
+      --content: 1180px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(132,88,214,.10), transparent 32%),
+        radial-gradient(circle at top right, rgba(132,88,214,.16), transparent 28%),
+        var(--bg);
+      line-height: 1.6;
+    }
+    a { color: inherit; text-decoration: none; }
+    .container { width: min(calc(100% - 32px), var(--content)); margin: 0 auto; }
+
+    .site-header {
+      position: sticky; top: 0; z-index: 20;
+      backdrop-filter: blur(18px);
+      background: rgba(246,244,239,.9);
+      border-bottom: 1px solid rgba(221,214,202,.7);
+    }
+    .nav {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 18px; min-height: 76px;
+    }
+    .brand {
+      display: flex; align-items: center; gap: 12px;
+      font-weight: 700; letter-spacing: -.03em;
+    }
+    .logo {
+      width: 45px; height: 45px; border-radius: 10px;
+      display: grid; place-items: center;
+      box-shadow: 0 12px 32px rgba(186, 160, 234, 0.45);
+      overflow: hidden;
+    }
+    .logo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .logo-placeholder {
+      font-size: 18px; color: #fff; font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    .nav-links, .lang-switch {
+      display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+    }
+    .nav-link, .lang-btn {
+      padding: 10px 14px; border-radius: 999px; color: var(--muted);
+      transition: .2s ease; border: 1px solid transparent; background: transparent;
+      cursor: pointer;
+    }
+    .nav-link:hover, .lang-btn:hover {
+      background: rgba(255,255,255,.9); color: var(--text); border-color: var(--line);
+    }
+    .lang-btn.active {
+      background: #fff; color: var(--text); border-color: var(--line);
+      box-shadow: 0 8px 24px rgba(0,0,0,.06);
+    }
+
+    .hero { padding: 56px 0 36px; }
+    .hero-inner {
+      background: var(--surface);
+      border-radius: var(--radius);
+      border: 1px solid rgba(255,255,255,.8);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(20px);
+      padding: 40px;
+    }
+
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 8px 12px; border-radius: 999px;
+      background: rgba(255,255,255,.9);
+      border: 1px solid var(--line); color: var(--muted); font-size: 13px;
+    }
+    h1, h2, h3 {
+      margin: 0; letter-spacing: -.04em; line-height: 1.05;
+    }
+    h1 {
+      font-size: clamp(42px, 8vw, 84px);
+      margin-top: 18px;
+      max-width: 20ch;
+    }
+    .lead {
+      margin-top: 18px;
+      max-width: 72ch;
+      color: var(--muted); font-size: 18px;
+    }
+
+    .cta-row {
+      display: flex; gap: 12px; flex-wrap: wrap;
+      margin-top: 26px;
+    }
+    .primary-btn, .secondary-btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+      padding: 14px 18px; border-radius: 16px;
+      font-weight: 600; transition: .2s ease;
+      border: 1px solid transparent;
+    }
+    .primary-btn {
+      background: linear-gradient(135deg, var(--accent), #a386ff);
+      color: #fff;
+    }
+    .secondary-btn {
+      background: rgba(255,255,255,.9);
+      border-color: var(--line);
+    }
+    .primary-btn:hover, .secondary-btn:hover {
+      transform: translateY(-1px);
+    }
+    .mini-note {
+      margin-top: 16px; color: var(--muted); font-size: 14px;
+      max-width: 72ch;
+    }
+
+    .doc-card {
+      background: var(--surface);
+      border: 1px solid rgba(255,255,255,.8);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(20px);
+      padding: 24px;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .doc-card .muted {
+      flex: 1 1 auto; /* текст растягивается и выталкивает ссылку вниз */
+    }
+
+    /* ссылка + иконка перехода */
+    .doc-card a.inline-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 8px;
+      font-size: 14px;
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .doc-card a.inline-link::after {
+      content: "↗";
+      font-size: 12px;
+      opacity: 0.85;
+    }
+
+    section { padding: 18px 0; }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: end;
+      margin-bottom: 18px;
+    }
+    .section-head p {
+      margin: 0;
+      color: var(--muted);
+      max-width: 60ch;
+      padding-top: 10px;
+    }
+
+    .grid-3, .grid-4, .docs-grid {
+      display: grid;
+      gap: 16px;
+    }
+    .grid-3 { grid-template-columns: repeat(3, 1fr); }
+    .grid-4 { grid-template-columns: repeat(4, 1fr); }
+    .docs-grid { grid-template-columns: repeat(3, 1fr); }
+
+    .card, .doc-card, .footer-card {
+      background: var(--surface);
+      border: 1px solid rgba(255,255,255,.8);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(20px);
+      padding: 24px;
+    }
+    .card h3, .doc-card h3 {
+      font-size: 24px;
+      margin-bottom: 12px;
+    }
+
+    .muted { color: var(--muted); }
+
+    .icon {
+      width: 44px; height: 44px; border-radius: 14px;
+      display: grid; place-items: center;
+      background: rgba(132,88,214,.12);
+      color: #8458d6;
+      margin-bottom: 18px;
+      font-weight: 700;
+    }
+
+    .safety-list, .footer-links {
+      display: grid;
+      gap: 12px;
+      margin-top: 18px;
+    }
+    .safety-item {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      padding: 14px 16px;
+      border-radius: 18px;
+      background: rgba(255,255,255,.9);
+      border: 1px solid var(--line);
+    }
+    .safety-item strong {
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .doc-card a.inline-link, .footer-links a {
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .notice {
+      padding: 18px 20px;
+      border-radius: 20px;
+      background: rgba(132,88,214,.06);
+      border: 1px solid rgba(132,88,214,.16);
+      color: #433261;
+    }
+
+    footer { padding: 24px 0 42px; }
+    .footer-card {
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 20px;
+    }
+    .footer-links {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .small {
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .header-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: #0F766E;
+      color: #ffffff;
+      font-weight: 600;
+      font-size: 14px;
+      border: 1px solid rgba(0,0,0,0.05);
+      box-shadow: 0 10px 20px rgba(15, 118, 110, 0.87);
+      text-decoration: none;
+      transition: .16s ease;
+      white-space: nowrap;
+    }
+
+    .header-status:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 14px 28px rgba(15, 118, 110, 0.87);
+    }
+
+    .header-status-icon {
+      font-size: 12px;
+    }
+
+    @media (max-width: 760px) {
+      .nav {
+        padding: 12px 0;
+        align-items: flex-start;
+        flex-direction: column;
+      }
+      .nav-right {
+        width: 100%;
+        justify-content: space-between;
+      }
+    }
+
+    @media (max-width: 1100px) {
+      .grid-4, .docs-grid, .footer-card, .grid-3 {
+        grid-template-columns: 1fr;
+      }
+    }
+    @media (max-width: 760px) {
+      .nav {
+        padding: 12px 0;
+        align-items: flex-start;
+        flex-direction: column;
+      }
+      h1 { max-width: 14ch; }
+      .hero-inner, .card, .doc-card, .footer-card {
+        padding: 20px;
+      }
+      .grid-3, .grid-4, .docs-grid {
+        grid-template-columns: 1fr;
+      }
+      .nav-links { display: none; }
+      .footer-links { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+    <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="./index.html">
+        <span class="logo">
+          <img src="logo_transparent.svg" alt="Trackly"
+              onerror="this.style.display='none';this.previousElementSibling&&this.previousElementSibling.classList.add('logo-placeholder')">
+          <span class="logo-placeholder">T</span>
+        </span>
+        <span>Trackly</span>
+      </a>
+
+      <nav class="nav-links">
+        <a class="nav-link" href="#features" data-i18n="nav.features">Возможности</a>
+        <a class="nav-link" href="#security" data-i18n="nav.security">Безопасность</a>
+        <a class="nav-link" href="#documents" data-i18n="nav.documents">Документы</a>
+        <a class="nav-link" href="#contact" data-i18n="nav.contact">Контакты</a>
+      </nav>
+
+      <div class="nav-right">
+        <div class="lang-switch">
+          <button class="lang-btn active" data-lang="ru">RU</button>
+          <button class="lang-btn" data-lang="en">EN</button>
+          <button class="lang-btn" data-lang="by">BY</button>
+          <button class="lang-btn" data-lang="be">BE</button>
+        </div>
+        <a class="header-status" href="./status.html">
+          <span data-i18n="header.status">Статус Trackly</span>
+          <span class="header-status-icon">↗</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <div class="hero-inner">
+          <div class="eyebrow" data-i18n="hero.eyebrow">
+            Персональный журнал приступов, терапии и самочувствия
+          </div>
+          <h1 data-i18n="hero.title">
+            Trackly помогает наблюдать за эпилепсией спокойнее и точнее.
+          </h1>
+          <p class="lead" data-i18n="hero.lead">
+            Приложение Trackly помогает фиксировать приступы, контролировать приём препаратов,
+            отмечать самочувствие, хранить данные об обследованиях и формировать понятные отчёты для врача.
+          </p>
+          <div class="cta-row">
+            <a class="primary-btn" href="#documents" data-i18n="hero.primary">Открыть документы</a>
+            <a class="secondary-btn" href="mailto:jaraslaukunin@gmail.com" data-i18n="hero.secondary">Связаться по email</a>
+          </div>
+          <p class="mini-note" data-i18n="hero.note">
+            Trackly не заменяет врача и не является медицинским изделием.
+            Сервис предназначен для личного учёта и подготовки информации для медицинской консультации.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="features">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2 data-i18n="features.title">Что умеет Trackly</h2>
+            <p data-i18n="features.lead">
+              Сервис создаётся как личный инструмент для людей с эпилепсией,
+              чтобы важные данные о состоянии и лечении были собраны в одном месте.
+            </p>
+          </div>
+        </div>
+        <div class="grid-4">
+          <article class="card">
+            <div class="icon">01</div>
+            <h3 data-i18n="features.f1.title">Журнал приступов</h3>
+            <p class="muted" data-i18n="features.f1.text">
+              Фиксация даты, времени, типа приступа, возможных триггеров, тяжести
+              и комментариев после эпизода.
+            </p>
+          </article>
+          <article class="card">
+            <div class="icon">02</div>
+            <h3 data-i18n="features.f2.title">Учёт лекарств</h3>
+            <p class="muted" data-i18n="features.f2.text">
+              Расписание терапии, отметки о приёме, остаток препарата и напоминания по графику.
+            </p>
+          </article>
+          <article class="card">
+            <div class="icon">03</div>
+            <h3 data-i18n="features.f3.title">Самочувствие и триггеры</h3>
+            <p class="muted" data-i18n="features.f3.text">
+              Записи о настроении, симптомах, побочных эффектах и факторах,
+              которые могли повлиять на состояние.
+            </p>
+          </article>
+          <article class="card">
+            <div class="icon">04</div>
+            <h3 data-i18n="features.f4.title">Отчёты для врача</h3>
+            <p class="muted" data-i18n="features.f4.text">
+              Экспорт сводки по приступам, лекарствам, самочувствию
+              и обследованиям в понятном формате.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="security">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2 data-i18n="security.title">Безопасность и инфраструктура</h2>
+            <p data-i18n="security.lead">
+              Сайт открыто сообщает, где размещаются данные и какие внешние сервисы используются для работы Trackly.
+            </p>
+          </div>
+        </div>
+        <div class="grid-3">
+          <article class="card">
+            <h3 data-i18n="security.card1.title">Хранение данных</h3>
+            <p class="muted" data-i18n="security.card1.text">
+              Trackly использует базу данных Supabase PostgreSQL в регионе AWS eu-west-1 (Ирландия)
+              для хранения пользовательских данных.
+            </p>
+          </article>
+          <article class="card">
+            <h3 data-i18n="security.card2.title">Почтовая доставка</h3>
+            <p class="muted" data-i18n="security.card2.text">
+              Для транзакционных и экстренных email-сообщений используется Resend.
+              Экстренные письма отправляются с адреса alerts@mail.tracklyapp.xyz.
+            </p>
+          </article>
+          <article class="card">
+            <h3 data-i18n="security.card3.title">Домен и DNS</h3>
+            <p class="muted" data-i18n="security.card3.text">
+              Домен tracklyapp.xyz обслуживается через hoster.by, а DNS-записи
+              используются для связи домена с почтовой инфраструктурой.
+            </p>
+          </article>
+        </div>
+        <div class="safety-list">
+          <div class="safety-item">
+            <div>•</div>
+            <div>
+              <strong data-i18n="security.item1.title">Подтверждение согласия</strong>
+              <span class="muted" data-i18n="security.item1.text">
+                При регистрации пользователь подтверждает согласие с документами при помощи чекбоксов.
+              </span>
+            </div>
+          </div>
+          <div class="safety-item">
+            <div>•</div>
+            <div>
+              <strong data-i18n="security.item2.title">Контроль над данными</strong>
+              <span class="muted" data-i18n="security.item2.text">
+                Пользователь может обратиться к оператору по вопросам персональных данных
+                и отзыва согласия через email.
+              </span>
+            </div>
+          </div>
+          <div class="safety-item">
+            <div>•</div>
+            <div>
+              <strong data-i18n="security.item3.title">Медицинская оговорка</strong>
+              <span class="muted" data-i18n="security.item3.text">
+                Trackly не является медицинским изделием, диагностическим средством
+                или заменой очной консультации врача.
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="documents">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2 data-i18n="documents.title">Документы</h2>
+            <p data-i18n="documents.lead">
+              Публичные документы Trackly доступны в веб-версии и используются
+              как ссылки в приложении при регистрации и входе.
+            </p>
+          </div>
+        </div>
+        <div class="docs-grid">
+          <article class="doc-card">
+            <h3 data-i18n="documents.privacy.title">Политика конфиденциальности</h3>
+            <p class="muted" data-i18n="documents.privacy.text">
+              Описание состава обрабатываемых данных, целей обработки, инфраструктуры,
+              сроков хранения и прав пользователя.
+            </p>
+            <a class="inline-link" href="./privacy.html" data-i18n="documents.open">Открыть документ</a>
+          </article>
+          <article class="doc-card">
+            <h3 data-i18n="documents.consent.title">Согласие на обработку данных</h3>
+            <p class="muted" data-i18n="documents.consent.text">
+              Текст согласия, который принимается пользователем через чекбокс при регистрации в Trackly.
+            </p>
+            <a class="inline-link" href="./consent.html" data-i18n="documents.open">Открыть документ</a>
+          </article>
+          <article class="doc-card">
+            <h3 data-i18n="documents.terms.title">Условия использования</h3>
+            <p class="muted" data-i18n="documents.terms.text">
+              Основные правила использования сервиса, ответственность сторон
+              и порядок изменения функциональности.
+            </p>
+            <a class="inline-link" href="./terms.html" data-i18n="documents.open">Открыть документ</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+
+
+    <section>
+      <div class="container">
+        <div class="notice" data-i18n="notice.text">
+          Многоязычная версия сайта доступна на русском, английском и двух белорусских вариантах:
+          в официальной орфографии и в латинизированной тарашкевице для публичной документации и интерфейсных ссылок.
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer id="contact">
+    <div class="container footer-card">
+      <div>
+        <h2 data-i18n="footer.title">Контакты и юридическая информация</h2>
+        <p class="muted" data-i18n="footer.lead">
+          Оператор Trackly — Кунин Ярослав Вадимович. По вопросам обработки персональных данных,
+          отзыва согласия и работы сервиса можно писать на электронную почту.
+        </p>
+        <p><a href="mailto:jaraslaukunin@gmail.com">jaraslaukunin@gmail.com</a></p>
+        <p class="small"> &copy; 2026 Trackly. Все права защищены. </p>
+      </div>
+      <div class="footer-links">
+        <a href="./privacy.html" data-i18n="footer.link1">Политика конфиденциальности</a>
+        <a href="./consent.html" data-i18n="footer.link2">Согласие на обработку данных</a>
+        <a href="./terms.html" data-i18n="footer.link3">Условия использования</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const translations = {
+      ru: {
+        pageTitle: 'Trackly — мониторинг эпилепсии',
+        'nav.features': 'Возможности',
+        'nav.security': 'Безопасность',
+        'nav.documents': 'Документы',
+        'header.status': 'Статус Trackly',
+        'nav.contact': 'Контакты',
+        'hero.eyebrow': 'Персональный журнал приступов, терапии и самочувствия',
+        'hero.title': 'Trackly помогает наблюдать за эпилепсией спокойнее и точнее.',
+        'hero.lead': 'Приложение Trackly помогает фиксировать приступы, контролировать приём препаратов, отмечать самочувствие, хранить данные об обследованиях и формировать понятные отчёты для врача.',
+        'hero.primary': 'Открыть документы',
+        'hero.secondary': 'Связаться по email',
+        'hero.note': 'Trackly не заменяет врача и не является медицинским изделием. Сервис предназначен для личного учёта и подготовки информации для медицинской консультации.',
+        'features.title': 'Что умеет Trackly',
+        'features.lead': 'Сервис создаётся как личный инструмент для людей с эпилепсией, чтобы важные данные о состоянии и лечении были собраны в одном месте.',
+        'features.f1.title': 'Журнал приступов',
+        'features.f1.text': 'Фиксация даты, времени, типа приступа, возможных триггеров, тяжести и комментариев после эпизода.',
+        'features.f2.title': 'Учёт лекарств',
+        'features.f2.text': 'Расписание терапии, отметки о приёме, остаток препарата и напоминания по графику.',
+        'features.f3.title': 'Самочувствие и триггеры',
+        'features.f3.text': 'Записи о настроении, симптомах, побочных эффектах и факторах, которые могли повлиять на состояние.',
+        'features.f4.title': 'Отчёты для врача',
+        'features.f4.text': 'Экспорт сводки по приступам, лекарствам, самочувствию и обследованиям в понятном формате.',
+        'security.title': 'Безопасность и инфраструктура',
+        'security.lead': 'Сайт открыто сообщает, где размещаются данные и какие внешние сервисы используются для работы Trackly.',
+        'security.card1.title': 'Хранение данных',
+        'security.card1.text': 'Trackly использует базу данных Supabase PostgreSQL в регионе AWS eu-west-1 (Ирландия) для хранения пользовательских данных.',
+        'security.card2.title': 'Почтовая доставка',
+        'security.card2.text': 'Для транзакционных и экстренных email-сообщений используется Resend. Экстренные письма отправляются с адреса alerts@mail.tracklyapp.xyz.',
+        'security.card3.title': 'Домен и DNS',
+        'security.card3.text': 'Домен tracklyapp.xyz обслуживается через hoster.by, а DNS-записи используются для связи домена с почтовой инфраструктурой.',
+        'security.item1.title': 'Подтверждение согласия',
+        'security.item1.text': 'При регистрации пользователь подтверждает согласие с документами при помощи чекбоксов.',
+        'security.item2.title': 'Контроль над данными',
+        'security.item2.text': 'Пользователь может обратиться к оператору по вопросам персональных данных и отзыва согласия через email.',
+        'security.item3.title': 'Медицинская оговорка',
+        'security.item3.text': 'Trackly не является медицинским изделием, диагностическим средством или заменой очной консультации врача.',
+        'documents.title': 'Документы',
+        'documents.lead': 'Публичные документы Trackly доступны в веб-версии и используются как ссылки в приложении при регистрации и входе.',
+        'documents.privacy.title': 'Политика конфиденциальности',
+        'documents.privacy.text': 'Описание состава обрабатываемых данных, целей обработки, инфраструктуры, сроков хранения и прав пользователя.',
+        'documents.consent.title': 'Согласие на обработку данных',
+        'documents.consent.text': 'Текст согласия, который принимается пользователем через чекбокс при регистрации в Trackly.',
+        'documents.terms.title': 'Условия использования',
+        'documents.terms.text': 'Основные правила использования сервиса, ответственность сторон и порядок изменения функциональности.',
+        'documents.open': 'Открыть документ',
+        'status.title': 'Статус работы Trackly',
+        'status.lead': 'На этой странице можно увидеть статус Supabase-проекта и внутренних health-check’ов приложения.',
+        'status.hosted': 'Бэкенд Trackly работает на Supabase. Технический статус облачной платформы доступен на отдельной странице статуса.',
+        'status.supabase': 'Страница статуса Supabase',
+        'status.trackly': 'Внутренний статус Trackly (health-check)',
+        'notice.text': 'Многоязычная версия сайта доступна на русском, английском и двух белорусских вариантах: в официальной орфографии и в латинизированной тарашкевице для публичной документации и интерфейсных ссылок.',
+        'footer.title': 'Контакты и юридическая информация',
+        'footer.lead': 'Оператор Trackly — Кунин Ярослав Вадимович. По вопросам обработки персональных данных, отзыва согласия и работы сервиса можно писать на электронную почту.',
+        'footer.link1': 'Политика конфиденциальности',
+        'footer.link2': 'Согласие на обработку данных',
+        'footer.link3': 'Условия использования'
+      },
+      en: {
+        pageTitle: 'Trackly — epilepsy monitoring',
+        'nav.features': 'Features',
+        'nav.security': 'Security',
+        'nav.documents': 'Documents',
+        'header.status': 'Trackly status',
+        'nav.contact': 'Contact',
+        'hero.eyebrow': 'Personal log of seizures, therapy, and wellbeing',
+        'hero.title': 'Trackly helps you observe epilepsy more calmly and precisely.',
+        'hero.lead': 'Trackly helps you record seizures, track medication intake, log wellbeing, store examination data, and generate clear reports for your doctor.',
+        'hero.primary': 'Open documents',
+        'hero.secondary': 'Contact via email',
+        'hero.note': 'Trackly does not replace a doctor and is not a medical device. It is intended for personal record keeping and preparing information for medical consultations.',
+        'features.title': 'What Trackly can do',
+        'features.lead': 'Trackly is built as a personal tool for people with epilepsy so that key data about condition and therapy lives in one place.',
+        'features.f1.title': 'Seizure log',
+        'features.f1.text': 'Record date, time, seizure type, potential triggers, severity, and post-episode notes.',
+        'features.f2.title': 'Medication tracking',
+        'features.f2.text': 'Therapy schedule, intake marks, remaining medication, and schedule-based reminders.',
+        'features.f3.title': 'Wellbeing and triggers',
+        'features.f3.text': 'Notes on mood, symptoms, side effects, and factors that may affect your condition.',
+        'features.f4.title': 'Doctor reports',
+        'features.f4.text': 'Export a summary of seizures, medication, wellbeing, and examinations in a clear format.',
+        'security.title': 'Security and infrastructure',
+        'security.lead': 'The site clearly states where data is hosted and which external services are used by Trackly.',
+        'security.card1.title': 'Data storage',
+        'security.card1.text': 'Trackly uses Supabase PostgreSQL in AWS eu-west-1 (Ireland) to store user data.',
+        'security.card2.title': 'Email delivery',
+        'security.card2.text': 'Resend is used for transactional and emergency emails. Emergency messages are sent from alerts@mail.tracklyapp.xyz.',
+        'security.card3.title': 'Domain and DNS',
+        'security.card3.text': 'The tracklyapp.xyz domain is managed via hoster.by, with DNS records used to connect it to the email infrastructure.',
+        'security.item1.title': 'Consent confirmation',
+        'security.item1.text': 'During registration, the user confirms consent to the documents via checkboxes.',
+        'security.item2.title': 'Data control',
+        'security.item2.text': 'The user can contact the operator about personal data and consent withdrawal via email.',
+        'security.item3.title': 'Medical disclaimer',
+        'security.item3.text': 'Trackly is not a medical device, diagnostic tool, or a replacement for an in-person doctor visit.',
+        'documents.title': 'Documents',
+        'documents.lead': 'Trackly’s public documents are available on the web and are used as links in the app during sign up and login.',
+        'documents.privacy.title': 'Privacy Policy',
+        'documents.privacy.text': 'Describes processed data, purposes, infrastructure, retention periods, and user rights.',
+        'documents.consent.title': 'Data processing consent',
+        'documents.consent.text': 'Consent text accepted by the user via checkbox during Trackly sign up.',
+        'documents.terms.title': 'Terms of Use',
+        'documents.terms.text': 'Basic rules of using the service, responsibilities, and change procedures.',
+        'documents.open': 'Open document',
+        'status.title': 'Trackly service status',
+        'status.lead': 'See the Supabase project status and internal health checks of the app.',
+        'status.hosted': 'Trackly backend runs on Supabase. The platform technical status is published on a separate status page.',
+        'status.supabase': 'Supabase status page',
+        'status.trackly': 'Internal Trackly status (health check)',
+        'notice.text': 'The multilingual website is available in Russian, English, and two Belarusian variants: official orthography and Latinized Taraškievica for public docs and interface links.',
+        'footer.title': 'Contacts and legal information',
+        'footer.lead': 'Trackly operator — Jaraslau Kunin. For questions about personal data, consent withdrawal, and service operation, please write by email.',
+        'footer.link1': 'Privacy Policy',
+        'footer.link2': 'Data processing consent',
+        'footer.link3': 'Terms of Use'
+      },
+      by: {
+        pageTitle: 'Trackly — маніторынг эпілепсіі',
+        'nav.features': 'Магчымасці',
+        'nav.security': 'Бяспека',
+        'nav.documents': 'Дакументы',
+        'header.status': 'Статус Trackly',
+        'nav.contact': 'Кантакты',
+        'hero.eyebrow': 'Асабісты дзённік прыпадкаў, тэрапіі і самаадчування',
+        'hero.title': 'Trackly дапамагае спакойна і дакладна назіраць за эпілепсіяй.',
+        'hero.lead': 'Прыкладанне Trackly дапамагае фіксаваць прыпадкі, кантраляваць прыём прэпаратаў, адзначаць самаадчуванне, захоўваць даныя аб абследаваннях і фарміраваць зводкі для ўрача.',
+        'hero.primary': 'Адкрыць дакументы',
+        'hero.secondary': 'Звязацца па email',
+        'hero.note': 'Trackly не з’яўляецца медыцынскім вырабам і не замяняе ўрача. Сэрвіс прызначаны для асабістага ўліку і падрыхтоўкі інфармацыі для медыцынскай кансультацыі.',
+        'features.title': 'Што ўмее Trackly',
+        'features.lead': 'Сэрвіс ствараецца як асабісты інструмент для людзей з эпілепсіяй, каб важныя даныя пра стан і лячэнне былі сабраныя ў адным месцы.',
+        'features.f1.title': 'Дзённік прыпадкаў',
+        'features.f1.text': 'Фіксацыя даты, часу, тыпу прыпадку, магчымых трыгераў, цяжкасці і каментару пасля эпізоду.',
+        'features.f2.title': 'Улік прэпаратаў',
+        'features.f2.text': 'Расклад тэрапіі, адзнакі аб прыёме, астатак прэпарату і напамінкі па графіку.',
+        'features.f3.title': 'Самаадчуванне і трыгеры',
+        'features.f3.text': 'Запісы пра настрой, сімптомы, пабочныя эфекты і фактары, што могуць уплываць на стан.',
+        'features.f4.title': 'Справаздачы для ўрача',
+        'features.f4.text': 'Экспарт зводкі па прыпадках, прэпаратах, самаадчуванні і абследаваннях у зручным фармаце.',
+        'security.title': 'Бяспека і інфраструктура',
+        'security.lead': 'Сайт адкрыта паведамляе, дзе захоўваюцца даныя і якія знешнія сэрвісы выкарыстоўваюцца для працы Trackly.',
+        'security.card1.title': 'Захоўванне даных',
+        'security.card1.text': 'Trackly выкарыстоўвае базу даных Supabase PostgreSQL у рэгіёне AWS eu-west-1 (Ірландыя) для захоўвання карыстальніцкіх даных.',
+        'security.card2.title': 'Дастаўка пошты',
+        'security.card2.text': 'Для транзакцыйных і аварыйных email-паведамленняў выкарыстоўваецца Resend. Аварыйныя лісты адпраўляюцца з адраса alerts@mail.tracklyapp.xyz.',
+        'security.card3.title': 'Дамен і DNS',
+        'security.card3.text': 'Дамен tracklyapp.xyz абслугоўваецца праз hoster.by, а DNS-запісы выкарыстоўваюцца для сувязі дамена з паштовай інфраструктурай.',
+        'security.item1.title': 'Пацвярджэнне згоды',
+        'security.item1.text': 'Пры рэгістрацыі карыстальнік пацвярджае згоду з дакументамі праз сцяжкі (checkbox).',
+        'security.item2.title': 'Кантроль над данымі',
+        'security.item2.text': 'Карыстальнік можа звярнуцца да аператара па пытаннях персанальных даных і адклікання згоды праз email.',
+        'security.item3.title': 'Медыцынская агаворка',
+        'security.item3.text': 'Trackly не з’яўляецца медыцынскім вырабам, дыягнастычным сродкам або заменай асабістай кансультацыі ўрача.',
+        'documents.title': 'Дакументы',
+        'documents.lead': 'Публічныя дакументы Trackly даступныя ў вэб-версіі і выкарыстоўваюцца як спасылкі ў прыкладанні пры рэгістрацыі і ўваходзе.',
+        'documents.privacy.title': 'Палітыка канфідэнцыяльнасці',
+        'documents.privacy.text': 'Апісанне складу даных, мэтаў апрацоўкі, інфраструктуры, тэрмінаў захоўвання і правоў карыстальніка.',
+        'documents.consent.title': 'Згода на апрацоўку даных',
+        'documents.consent.text': 'Тэкст згоды, які прымаецца карыстальнікам праз сцяжок пры рэгістрацыі ў Trackly.',
+        'documents.terms.title': 'Умовы выкарыстання',
+        'documents.terms.text': 'Асноўныя правілы выкарыстання сервісу, адказнасць бакоў і парадак змянення функцыянальнасці.',
+        'documents.open': 'Адкрыць дакумент',
+        'status.title': 'Статус працы Trackly',
+        'status.lead': 'На гэтай старонцы можна ўбачыць статус Supabase-праекта і ўнутраных health-check’аў прыкладання.',
+        'status.hosted': 'Backend Trackly працуе на Supabase. Тэхнічны статус платформы даступен на асобнай старонцы статусу.',
+        'status.supabase': 'Старонка статусу Supabase',
+        'status.trackly': 'Унутраны статус Trackly (health-check)',
+        'notice.text': 'Шматмоўная версія сайта даступная на рускай, англійскай і двух беларускіх варыянтах: у афіцыйнай арфаграфіі і лацінізаванай тарашкевіцы для публічнай дакументацыі і інтэрфейсных спасылак.',
+        'footer.title': 'Кантакты і юрыдычная інфармацыя',
+        'footer.lead': 'Аператар Trackly — Кунин Яраслаў Вадзімавіч. Па пытаннях апрацоўкі персанальных даных, адклікання згоды і працы сервісу можна пісаць на электронную пошту.',
+        'footer.link1': 'Палітыка канфідэнцыяльнасці',
+        'footer.link2': 'Згода на апрацоўку даных',
+        'footer.link3': 'Умовы выкарыстання'
+      },
+      be: {
+        pageTitle: 'Trackly — manitorynh epilėpsii',
+        'nav.features': 'Mahčymaści',
+        'nav.security': 'Biaśpieka',
+        'nav.documents': 'Dakumienty',
+        'header.status': 'Status Trackly',
+        'nav.contact': 'Kantakty',
+
+        'hero.eyebrow': 'Asabisty dzioŭnik prypadkaŭ, terapii i samaadčuvańnia',
+        'hero.title': 'Trackly dapamahaje spakojnie i dakladna nazirać za epilėpsijaj.',
+        'hero.lead': 'Prykladannie Trackly dapamahaje fiksavać prypadki, kantrola-vać pryjom preparataŭ, adznačać samaadčuvańnie, zachoŭvać danyja ab absledavańniach i farmiravać zvodki dlia ŭrača.',
+        'hero.primary': 'Adkryć dakumienty',
+        'hero.secondary': 'Zviazaćsia pa email',
+        'hero.note': 'Trackly nie z’jaŭlajecca miedycynskim vyro-bam i nie zamianiaje ŭrača. Sėrvis pryznacza-n y dlia asabista-ha ŭliku i padrychtoŭki infarmacyi dlia miedycynskaj kan-sultacyi.',
+
+        'features.title': 'Što ŭmiej-e Trackly',
+        'features.lead': 'Sėrvis stvaraiecca jak asabisty instrumient dlia ludziej z epilėpsijaj, kab važnyja danyja pra stan i liečannie byli sabranyja ŭ adnym miescy.',
+        'features.f1.title': 'Dzioŭnik prypadkaŭ',
+        'features.f1.text': 'Fiksacyja daty, času, typu prypadku, mahčymych tryhieraŭ, ciažkaści i kamientaru paślia epizodu.',
+        'features.f2.title': 'Ŭlik preparataŭ',
+        'features.f2.text': 'Raskład terap ii, adznaki ab pryjom-ie, astatak preparatu i napamianki pa hrafiku.',
+        'features.f3.title': 'Samaadčuvańnie i tryhery',
+        'features.f3.text': 'Zapisy pra nastroj, symptomy, pabočnyja efekty i faktary, jakija mahli upłyvać na stan.',
+        'features.f4.title': 'Spraŭazdačy dlia ŭrača',
+        'features.f4.text': 'Ekspart zvodki pra prypadki, preparaty, samaadčuvańnie i absledavańni ŭ zručnym farmacie.',
+
+        'security.title': 'Biaśpieka i infrastruktura',
+        'security.lead': 'Sajt adkryta paviedamliaje, dzie zachoŭvajucca danyja i jakija vonkavyja sėrvisy vykarystoŭvaje Trackly.',
+        'security.card1.title': 'Zachoŭvańnie danychaŭ',
+        'security.card1.text': 'Trackly vykarystoŭvaje bazu danychaŭ Supabase PostgreSQL u rehijonie AWS eu-west-1 (Irlandyja) dlia zachoŭvańnia karystaĺnickich danychaŭ.',
+        'security.card2.title': 'Dastaŭka pošty',
+        'security.card2.text': 'Dlia tranzakcyjnych i avaryjnych email-paviedamleńniaŭ vykarystoŭvajecca Resend. Avaryjnyja listy adsylaŭcca z adrasu alerts@mail.tracklyapp.xyz.',
+        'security.card3.title': 'Damen i DNS',
+        'security.card3.text': 'Damen tracklyapp.xyz absluhoŭvajecca praz hoster.by, a DNS-zapisy vykarystoŭvajucca dlia suv iazi damena z paštovaj infrastrukturaj.',
+        'security.item1.title': 'Pacviardžańnie zhod y',
+        'security.item1.text': 'Pry rehistracyi karystaĺnik pacviardža-je zhodu z dakumientami praz ściažki (checkbox).',
+        'security.item2.title': 'Kantrol nad danymi',
+        'security.item2.text': 'Karystaĺnik moža zviar-nucca da apieratara pa pytanniach pier-sanalnych danychaŭ i adkli-kańnia zhod y praz email.',
+        'security.item3.title': 'Miedycynskaja ahavorka',
+        'security.item3.text': 'Trackly nie z’jaŭlajecca miedycynskim vyrobam, dyjahnostyčnym sredkam abo zamianoj asabistaj kan-sultacyi ŭrača.',
+
+        'documents.title': 'Dakumienty',
+        'documents.lead': 'Publicznyja dakumienty Trackly dastupnyja ŭ veb-versii i vykarystoŭvajucca jak spasyłki ŭ prykladanni pry rehistracyi i ŭvachodzie.',
+        'documents.privacy.title': 'Palityka kanfidecyjnaści',
+        'documents.privacy.text': 'Apisannie skład-u danychaŭ, metaŭ apra-coŭki, infrastruktury, termi-naŭ zachoŭvańnia i pravoŭ karystaĺnika.',
+        'documents.consent.title': 'Zhod-a na apra-coŭku danychaŭ',
+        'documents.consent.text': 'Tekst zhod-y, jaki pryjmaje karystaĺnik praz ściažok pry rehistracyi ŭ Trackly.',
+        'documents.terms.title': 'Umovy vykarystańnia',
+        'documents.terms.text': 'Asnoŭnyja pravyly vykarystańnia sėrvisu, adkaznaść bakoŭ i paradak zmienaŭ funkc yjn aĺnaści.',
+        'documents.open': 'Adkryć dakumient',
+
+        'status.title': 'Status pracy Trackly',
+        'status.lead': 'Na hetaj staroncy možna ŭbačyć status prajekta Supabase i ŭnutrany-ch health-check-aŭ prykladannia.',
+        'status.hosted': 'Backend Trackly pracuje na Supabase. Technikny status platformy da-stupny na asobnaj status-staroncy.',
+        'status.supabase': 'Status-staronka Supabase',
+        'status.trackly': 'Ŭnutrany status Trackly (health-check)',
+
+        'notice.text': 'Šmatmoŭnaja versija sajta da-stupnaja na ruskaj, anhłijskaj i dźvuch bielaruskich varyjantach: u aficyjnaj arfachrafii i lacinizavanaj taraškievicy dlia publicnaj dakumientacyi i interfejsnych spasyłak.',
+
+        'footer.title': 'Kantakty i jurydyčna-ja infarmacyja',
+        'footer.lead': 'Aperatar Trackly — Kunin Jarasłaŭ Vadzimavič. Pa pytanniach apra-coŭki pier-sanalnych danychaŭ, adkli-kańnia zhod-y i pracy sėrvisu možna pisać na elektronnuju poštu.',
+        'footer.link1': 'Palityka kanfidecyjnaści',
+        'footer.link2': 'Zhod-a na apra-coŭku danychaŭ',
+        'footer.link3': 'Umovy vykarystańnia'
+      }
+    };
+
+    function applyTranslations(lang) {
+      const dict = translations[lang] || translations.ru;
+      document.documentElement.lang = (lang === 'by' || lang === 'be') ? 'be' : lang;
+      document.title = dict.pageTitle || translations.ru.pageTitle;
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (dict[key]) el.textContent = dict[key];
+      });
+      document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.lang === lang);
+      });
+      localStorage.setItem('trackly-lang', lang);
+    }
+
+    const savedLang = localStorage.getItem('trackly-lang') || 'ru';
+    applyTranslations(savedLang);
+
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+      btn.addEventListener('click', () => applyTranslations(btn.dataset.lang));
+    });
+  </script>
+</body>
+</html>

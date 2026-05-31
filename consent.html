@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title data-i18n="consent.pageTitle">Согласие на обработку данных — Trackly</title>
+  <style>
+    :root {
+      --bg: #f6f4ef;
+      --surface: rgba(255,255,255,.92);
+      --text: #1f1d1a;
+      --muted: #6e6a63;
+      --line: #ddd6ca;
+      --accent: #8458d6;
+      --shadow: 0 18px 60px rgba(31,29,26,.08);
+      --radius: 20px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(132,88,214,.10), transparent 32%),
+        radial-gradient(circle at top right, rgba(132,88,214,.16), transparent 28%),
+        var(--bg);
+      line-height: 1.65;
+      font-size: 15px;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .shell { width: min(calc(100% - 32px), 980px); margin: 0 auto; }
+    header {
+      position: sticky; top: 0; z-index: 10;
+      backdrop-filter: blur(18px);
+      background: rgba(246,244,239,.94);
+      border-bottom: 1px solid rgba(221,214,202,.7);
+    }
+    .nav {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 16px; min-height: 72px;
+    }
+    .brand {
+      display: flex; align-items: center; gap: 10px;
+      font-weight: 700; letter-spacing: -.03em;
+      color: inherit; text-decoration: none;
+    }
+    .logo {
+      width: 45px; height: 45px; border-radius: 10px;
+      display: grid; place-items: center;
+      box-shadow: 0 12px 32px rgba(186,160,234,.45);
+      overflow: hidden;
+    }
+    .logo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .logo-placeholder {
+      font-size: 18px; color: #fff; font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .lang-switch {
+      display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+    }
+    .lang-btn {
+      padding: 8px 12px; border-radius: 999px;
+      border: 1px solid transparent;
+      background: transparent;
+      color: var(--muted);
+      font-size: 13px;
+      cursor: pointer;
+      transition: .18s ease;
+    }
+    .lang-btn:hover {
+      background: rgba(255,255,255,.95);
+      border-color: var(--line);
+      color: var(--text);
+    }
+    .lang-btn.active {
+      background: #fff;
+      border-color: var(--line);
+      color: var(--text);
+      box-shadow: 0 8px 20px rgba(0,0,0,.06);
+    }
+    main { padding: 22px 0 32px; }
+    .doc-card {
+      margin-top: 16px;
+      background: var(--surface);
+      border-radius: var(--radius);
+      border: 1px solid rgba(255,255,255,.8);
+      box-shadow: var(--shadow);
+      padding: 22px 22px 26px;
+    }
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 14px;
+      color: var(--muted);
+      text-decoration: none;
+      margin-top: 16px;
+      margin-bottom: 8px;
+    }
+    .back-link:hover {
+      color: var(--text);
+      text-decoration: underline;
+    }
+    h1 {
+      margin: 4px 0 6px;
+      font-size: 26px;
+      letter-spacing: -.03em;
+    }
+    .doc-meta {
+      margin: 0 0 16px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+    h2 {
+      margin: 18px 0 6px;
+      font-size: 19px;
+      letter-spacing: -.02em;
+    }
+    p { margin: 6px 0; }
+    ul { margin: 4px 0 10px 18px; padding: 0; }
+    li { margin: 3px 0; }
+    @media (max-width: 720px) {
+      .nav { flex-direction: column; align-items: flex-start; padding: 10px 0 8px; }
+      .doc-card { padding: 18px 16px 22px; }
+      h1 { font-size: 22px; }
+      h2 { font-size: 17px; }
+    }
+  </style>
+</head>
+<body>
+<header>
+  <div class="shell nav">
+    <a class="brand" href="./index.html">
+      <span class="logo">
+        <img src="logo_transparent.svg" alt="Trackly"
+             onerror="this.style.display='none';this.previousElementSibling&&this.previousElementSibling.classList.add('logo-placeholder')">
+        <span class="logo-placeholder">T</span>
+      </span>
+      <span>Trackly</span>
+    </a>
+    <div class="lang-switch">
+      <button class="lang-btn" data-lang="ru">RU</button>
+      <button class="lang-btn" data-lang="en">EN</button>
+      <button class="lang-btn" data-lang="by">BY</button>
+      <button class="lang-btn" data-lang="be">BE</button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="shell">
+    <a href="./index.html" class="back-link" data-i18n="consent.back">← Вернуться на главную</a>
+    <article class="doc-card">
+      <h1 data-i18n="consent.title">Согласие на обработку персональных данных при использовании программного средства «Trackly»</h1>
+      <p class="doc-meta" data-i18n="consent.meta">Настоящее Согласие определяет условия обработки персональных данных пользователей программного средства персонального мониторинга состояния и медикаментозного лечения пациентов с эпилепсией «Trackly».</p>
+
+      <h2 data-i18n="consent.1.title">1. Общие положения</h2>
+      <p data-i18n="consent.1.p1">Настоящее Согласие на обработку персональных данных (далее — Согласие) разработано для пользователей программного средства «Trackly» (далее — Программное средство, Trackly).</p>
+      <p data-i18n="consent.1.p2">Устанавливая Trackly, проходя регистрацию и/или продолжая использование Программного средства, Пользователь, устанавливая отметку («галочку») в соответствующем поле и нажимая кнопку регистрации/продолжения, выражает своё полное и безоговорочное согласие с настоящим Согласием.</p>
+
+      <h2 data-i18n="consent.2.title">2. Персональные данные, на обработку которых даётся Согласие</h2>
+      <p data-i18n="consent.2.p1">Пользователь даёт Согласие на обработку следующих персональных данных, которые он сообщает при регистрации и в процессе использования Trackly:</p>
+      <ul>
+        <li data-i18n="consent.2.li1">фамилия, имя, отчество;</li>
+        <li data-i18n="consent.2.li2">адрес электронной почты;</li>
+        <li data-i18n="consent.2.li3">номер телефона (при его указании);</li>
+        <li data-i18n="consent.2.li4">данные об эпилептических приступах (дата и время, тип приступа, длительность, возможные триггеры, комментарии и иные сведения, которые Пользователь добровольно вносит);</li>
+        <li data-i18n="consent.2.li5">данные о медикаментозной терапии (наименование лекарственного препарата, дозировка, схема приёма, факты приёма);</li>
+        <li data-i18n="consent.2.li6">записи о самочувствии, побочных эффектах и иных субъективных состояниях;</li>
+        <li data-i18n="consent.2.li7">данные об экстренных контактах, указанных Пользователем (Ф.И.О., адреса электронной почты, иные контактные данные);</li>
+        <li data-i18n="consent.2.li8">технические данные, которые могут автоматически передаваться при использовании Trackly: тип и версия операционной системы, версия приложения, время доступа, идентификатор сессии и иная подобная информация, необходимая для корректной работы Программного средства.</li>
+      </ul>
+      <p data-i18n="consent.2.p2">При внесении данных третьих лиц (например, экстренных контактов) Пользователь подтверждает, что получил согласие этих лиц на передачу их данных и получение ими экстренных оповещений.</p>
+
+      <h2 data-i18n="consent.3.title">3. Цели обработки персональных данных</h2>
+      <p data-i18n="consent.3.p1">Персональные данные Пользователя обрабатываются в следующих целях:</p>
+      <ul>
+        <li data-i18n="consent.3.li1">регистрация Пользователя и предоставление доступа к функционалу Trackly;</li>
+        <li data-i18n="consent.3.li2">ведение персонального журнала эпилептических приступов, медикаментозной терапии и самочувствия;</li>
+        <li data-i18n="consent.3.li3">анализ динамики состояния здоровья Пользователя в пределах функционала Trackly;</li>
+        <li data-i18n="consent.3.li4">формирование отчётов для последующей передачи лечащему врачу или иного использования по усмотрению Пользователя;</li>
+        <li data-i18n="consent.3.li5">отправка экстренных оповещений на адреса электронной почты экстренных контактов, указанных Пользователем;</li>
+        <li data-i18n="consent.3.li6">обеспечение технической работоспособности, безопасности и улучшение качества работы Trackly;</li>
+        <li data-i18n="consent.3.li7">взаимодействие с Пользователем по вопросам работы Trackly (ответы на обращения, уведомления о важных изменениях и др.).</li>
+      </ul>
+
+      <h2 data-i18n="consent.4.title">4. Действия с персональными данными</h2>
+      <p data-i18n="consent.4.p1">В рамках настоящего Согласия под обработкой персональных данных понимаются любые действия (операции) с персональными данными, включая:</p>
+      <ul>
+        <li data-i18n="consent.4.li1">сбор, запись, систематизацию, накопление, хранение, уточнение (обновление, изменение);</li>
+        <li data-i18n="consent.4.li2">извлечение, использование, передачу (предоставление);</li>
+        <li data-i18n="consent.4.li3">обезличивание, блокирование, удаление и уничтожение.</li>
+      </ul>
+      <p data-i18n="consent.4.p2">Обработка персональных данных осуществляется с применением средств автоматизации и без их использования, с применением разумных технических и организационных мер защиты.</p>
+
+      <h2 data-i18n="consent.5.title">5. Передача персональных данных третьим лицам</h2>
+      <p data-i18n="consent.5.p1">Персональные данные Пользователя могут быть переданы третьим лицам в следующих случаях:</p>
+      <ul>
+        <li data-i18n="consent.5.li1">по прямому указанию или с явного согласия Пользователя (например, при экспорте отчёта для врача);</li>
+        <li data-i18n="consent.5.li2">при отправке экстренных оповещений на адреса электронной почты экстренных контактов, указанных Пользователем;</li>
+        <li data-i18n="consent.5.li3">при использовании облачных сервисов, необходимых для работы Trackly (в том числе Supabase PostgreSQL и почтового сервиса Resend) в рамках соглашений с соответствующими поставщиками;</li>
+        <li data-i18n="consent.5.li4">в случаях, прямо предусмотренных применимым законодательством.</li>
+      </ul>
+      <p data-i18n="consent.5.p2">Экстренные оповещения формируются на основании данных, введённых Пользователем, и отправляются с адреса электронной почты alerts@mail.tracklyapp.xyz на адреса экстренных контактов.</p>
+
+      <h2 data-i18n="consent.6.title">6. Срок действия Согласия и его отзыв</h2>
+      <p data-i18n="consent.6.p1">Согласие действует с момента его принятия Пользователем (установки «галочки» при регистрации) и до момента его отзыва.</p>
+      <p data-i18n="consent.6.p2">Пользователь вправе в любой момент отозвать своё Согласие на обработку персональных данных, направив электронное обращение с пометкой «Отзыв согласия на обработку персональных данных» на адрес: <a href="mailto:jaraslaukunin@gmail.com">jaraslaukunin@gmail.com</a>.</p>
+      <p data-i18n="consent.6.p3">После получения отзыва Согласия обработка персональных данных прекращается, за исключением случаев, когда сохранение данных требуется в соответствии с законодательством либо необходимо для защиты прав и законных интересов Оператора. Данные подлежат удалению или обезличиванию в разумный срок.</p>
+
+      <h2 data-i18n="consent.7.title">7. Подтверждение Пользователя</h2>
+      <p data-i18n="consent.7.p1">Устанавливая отметку («галочку») при регистрации и/или продолжая использование Trackly, Пользователь подтверждает, что:</p>
+      <ul>
+        <li data-i18n="consent.7.li1">ознакомился с текстом настоящего Согласия;</li>
+        <li data-i18n="consent.7.li2">понимает его содержание и последствия предоставления Согласия;</li>
+        <li data-i18n="consent.7.li3">предоставляет персональные данные добровольно;</li>
+        <li data-i18n="consent.7.li4">даёт согласие на их обработку на условиях, изложенных в настоящем документе.</li>
+      </ul>
+    </article>
+  </div>
+</main>
+
+<script>
+const consentDict = {
+  ru: {
+    'consent.pageTitle': 'Согласие на обработку данных — Trackly',
+    'consent.back': '← Вернуться на главную',
+    'consent.title': 'Согласие на обработку персональных данных при использовании программного средства «Trackly»',
+    'consent.meta': 'Настоящее Согласие определяет условия обработки персональных данных пользователей программного средства персонального мониторинга состояния и медикаментозного лечения пациентов с эпилепсией «Trackly».',
+    'consent.1.title': '1. Общие положения',
+    'consent.1.p1': 'Настоящее Согласие на обработку персональных данных (далее — Согласие) разработано для пользователей программного средства «Trackly» (далее — Программное средство, Trackly).',
+    'consent.1.p2': 'Устанавливая Trackly, проходя регистрацию и/или продолжая использование Программного средства, Пользователь, устанавливая отметку («галочку») в соответствующем поле и нажимая кнопку регистрации/продолжения, выражает своё полное и безоговорочное согласие с настоящим Согласием.',
+    'consent.2.title': '2. Персональные данные, на обработку которых даётся Согласие',
+    'consent.2.p1': 'Пользователь даёт Согласие на обработку следующих персональных данных, которые он сообщает при регистрации и в процессе использования Trackly:',
+    'consent.2.li1': 'фамилия, имя, отчество;',
+    'consent.2.li2': 'адрес электронной почты;',
+    'consent.2.li3': 'номер телефона (при его указании);',
+    'consent.2.li4': 'данные об эпилептических приступах (дата и время, тип приступа, длительность, возможные триггеры, комментарии и иные сведения, которые Пользователь добровольно вносит);',
+    'consent.2.li5': 'данные о медикаментозной терапии (наименование лекарственного препарата, дозировка, схема приёма, факты приёма);',
+    'consent.2.li6': 'записи о самочувствии, побочных эффектах и иных субъективных состояниях;',
+    'consent.2.li7': 'данные об экстренных контактах, указанных Пользователем (Ф.И.О., адреса электронной почты, иные контактные данные);',
+    'consent.2.li8': 'технические данные, которые могут автоматически передаваться при использовании Trackly: тип и версия операционной системы, версия приложения, время доступа, идентификатор сессии и иная подобная информация, необходимая для корректной работы Программного средства.',
+    'consent.2.p2': 'При внесении данных третьих лиц (например, экстренных контактов) Пользователь подтверждает, что получил согласие этих лиц на передачу их данных и получение ими экстренных оповещений.',
+    'consent.3.title': '3. Цели обработки персональных данных',
+    'consent.3.p1': 'Персональные данные Пользователя обрабатываются в следующих целях:',
+    'consent.3.li1': 'регистрация Пользователя и предоставление доступа к функционалу Trackly;',
+    'consent.3.li2': 'ведение персонального журнала эпилептических приступов, медикаментозной терапии и самочувствия;',
+    'consent.3.li3': 'анализ динамики состояния здоровья Пользователя в пределах функционала Trackly;',
+    'consent.3.li4': 'формирование отчётов для последующей передачи лечащему врачу или иного использования по усмотрению Пользователя;',
+    'consent.3.li5': 'отправка экстренных оповещений на адреса электронной почты экстренных контактов, указанных Пользователем;',
+    'consent.3.li6': 'обеспечение технической работоспособности, безопасности и улучшение качества работы Trackly;',
+    'consent.3.li7': 'взаимодействие с Пользователем по вопросам работы Trackly (ответы на обращения, уведомления о важных изменениях и др.).',
+    'consent.4.title': '4. Действия с персональными данными',
+    'consent.4.p1': 'В рамках настоящего Согласия под обработкой персональных данных понимаются любые действия (операции) с персональными данными, включая:',
+    'consent.4.li1': 'сбор, запись, систематизацию, накопление, хранение, уточнение (обновление, изменение);',
+    'consent.4.li2': 'извлечение, использование, передачу (предоставление);',
+    'consent.4.li3': 'обезличивание, блокирование, удаление и уничтожение.',
+    'consent.4.p2': 'Обработка персональных данных осуществляется с применением средств автоматизации и без их использования, с применением разумных технических и организационных мер защиты.',
+    'consent.5.title': '5. Передача персональных данных третьим лицам',
+    'consent.5.p1': 'Персональные данные Пользователя могут быть переданы третьим лицам в следующих случаях:',
+    'consent.5.li1': 'по прямому указанию или с явного согласия Пользователя (например, при экспорте отчёта для врача);',
+    'consent.5.li2': 'при отправке экстренных оповещений на адреса электронной почты экстренных контактов, указанных Пользователем;',
+    'consent.5.li3': 'при использовании облачных сервисов, необходимых для работы Trackly (в том числе Supabase PostgreSQL и почтового сервиса Resend) в рамках соглашений с соответствующими поставщиками;',
+    'consent.5.li4': 'в случаях, прямо предусмотренных применимым законодательством.',
+    'consent.5.p2': 'Экстренные оповещения формируются на основании данных, введённых Пользователем, и отправляются с адреса электронной почты alerts@mail.tracklyapp.xyz на адреса экстренных контактов.',
+    'consent.6.title': '6. Срок действия Согласия и его отзыв',
+    'consent.6.p1': 'Согласие действует с момента его принятия Пользователем (установки «галочки» при регистрации) и до момента его отзыва.',
+    'consent.6.p2': 'Пользователь вправе в любой момент отозвать своё Согласие на обработку персональных данных, направив электронное обращение с пометкой «Отзыв согласия на обработку персональных данных» на адрес: jaraslaukunin@gmail.com.',
+    'consent.6.p3': 'После получения отзыва Согласия обработка персональных данных прекращается, за исключением случаев, когда сохранение данных требуется в соответствии с законодательством либо необходимо для защиты прав и законных интересов Оператора. Данные подлежат удалению или обезличиванию в разумный срок.',
+    'consent.7.title': '7. Подтверждение Пользователя',
+    'consent.7.p1': 'Устанавливая отметку («галочку») при регистрации и/или продолжая использование Trackly, Пользователь подтверждает, что:',
+    'consent.7.li1': 'ознакомился с текстом настоящего Согласия;',
+    'consent.7.li2': 'понимает его содержание и последствия предоставления Согласия;',
+    'consent.7.li3': 'предоставляет персональные данные добровольно;',
+    'consent.7.li4': 'даёт согласие на их обработку на условиях, изложенных в настоящем документе.'
+  },
+  en: {
+    'consent.pageTitle': 'Data processing consent — Trackly',
+    'consent.back': '← Back to main page',
+    'consent.title': 'Consent to personal data processing when using Trackly',
+    'consent.meta': 'This Consent describes the conditions under which personal data of Trackly users are processed.',
+    'consent.1.title': '1. General provisions',
+    'consent.1.p1': 'This Consent to personal data processing (the Consent) is intended for users of the Trackly software (the Software, Trackly).',
+    'consent.1.p2': 'By installing Trackly, registering and/or continuing to use the Software, and by ticking the checkbox and pressing the registration/continue button, the User gives full and unconditional consent to this document.',
+    'consent.2.title': '2. Personal data covered by this Consent',
+    'consent.2.p1': 'The User consents to processing the following personal data provided during registration and use of Trackly:',
+    'consent.2.li1': 'surname, first name, patronymic;',
+    'consent.2.li2': 'email address;',
+    'consent.2.li3': 'phone number (if provided);',
+    'consent.2.li4': 'data on epileptic seizures (date and time, type, duration, possible triggers, comments and other data voluntarily entered by the User);',
+    'consent.2.li5': 'data on medication therapy (drug name, dosage, regimen, actual intakes);',
+    'consent.2.li6': 'records on wellbeing, side effects and other subjective states;',
+    'consent.2.li7': 'data on emergency contacts specified by the User (name, email addresses and other contact details);',
+    'consent.2.li8': 'technical data automatically transmitted while using Trackly: OS type and version, app version, access time, session identifier and similar information necessary for proper operation.',
+    'consent.2.p2': 'When entering third-party data (e.g. emergency contacts), the User confirms that they have obtained consent from these persons to transfer their data and for them to receive emergency notifications.',
+    'consent.3.title': '3. Purposes of processing personal data',
+    'consent.3.p1': 'Personal data are processed for the following purposes:',
+    'consent.3.li1': 'registering the User and providing access to Trackly functionality;',
+    'consent.3.li2': 'maintaining a personal journal of epileptic seizures, medication therapy and wellbeing;',
+    'consent.3.li3': 'analysing health dynamics within Trackly functionality;',
+    'consent.3.li4': 'generating reports for transfer to the attending physician or other use at the User\'s discretion;',
+    'consent.3.li5': 'sending emergency notifications to emergency contact email addresses specified by the User;',
+    'consent.3.li6': 'ensuring technical operability, security and improving Trackly;',
+    'consent.3.li7': 'interacting with the User regarding Trackly (support, important updates, etc.).',
+    'consent.4.title': '4. Actions with personal data',
+    'consent.4.p1': 'For this Consent, processing means any operations with personal data, including:',
+    'consent.4.li1': 'collection, recording, systematisation, accumulation, storage, updating (modification);',
+    'consent.4.li2': 'retrieval, use, transfer (provision);',
+    'consent.4.li3': 'anonymisation, blocking, deletion and destruction.',
+    'consent.4.p2': 'Processing is carried out with and without automation tools using reasonable technical and organisational protection measures.',
+    'consent.5.title': '5. Transfer of personal data to third parties',
+    'consent.5.p1': 'Personal data may be transferred to third parties in the following cases:',
+    'consent.5.li1': 'at the explicit instruction or with explicit consent of the User (for example, when exporting a report for a doctor);',
+    'consent.5.li2': 'when sending emergency notifications to emergency contacts specified by the User;',
+    'consent.5.li3': 'when using cloud services required for Trackly (including Supabase PostgreSQL and Resend) under agreements with providers;',
+    'consent.5.li4': 'when required by applicable law.',
+    'consent.5.p2': 'Emergency notifications are generated from data entered by the User and are sent from alerts@mail.tracklyapp.xyz to emergency contact addresses.',
+    'consent.6.title': '6. Term of Consent and withdrawal',
+    'consent.6.p1': 'The Consent is valid from the moment it is accepted by the User (checkbox during registration) until it is withdrawn.',
+    'consent.6.p2': 'The User may withdraw their Consent at any time by sending an email marked "Withdrawal of consent to personal data processing" to: jaraslaukunin@gmail.com.',
+    'consent.6.p3': 'After the withdrawal is received, processing of personal data is stopped, except where retention is required by law or necessary to protect the Operator\'s rights and legitimate interests. The data are deleted or anonymised within a reasonable period.',
+    'consent.7.title': '7. User confirmation',
+    'consent.7.p1': 'By ticking the checkbox during registration and/or continuing to use Trackly, the User confirms that they:',
+    'consent.7.li1': 'have read this Consent text;',
+    'consent.7.li2': 'understand its content and the implications of giving Consent;',
+    'consent.7.li3': 'provide personal data voluntarily;',
+    'consent.7.li4': 'consent to processing under the terms set out in this document.'
+  },
+  by: {
+    'consent.pageTitle': 'Згода на апрацоўку даных — Trackly',
+    'consent.back': '← Вярнуцца на галоўную',
+    'consent.title': 'Згода на апрацоўку персанальных даных пры выкарыстанні праграмнага сродку «Trackly»',
+    'consent.meta': 'Гэтая Згода вызначае ўмовы апрацоўкі персанальных даных карыстальнікаў праграмнага сродку «Trackly».',
+    'consent.1.title': '1. Агульныя палажэнні',
+    'consent.1.p1': 'Гэтая Згода на апрацоўку персанальных даных (далей — Згода) распрацавана для карыстальнікаў праграмнага сродку «Trackly» (далей — Праграмны сродак, Trackly).',
+    'consent.1.p2': 'Усталёўваючы Trackly, праходзячы рэгістрацыю і/або працягваючы выкарыстанне Праграмнага сродку, Карыстальнік, устанаўліваючы адзнаку («галачку») ў адпаведным полі і націскаючы кнопку рэгістрацыі/працягу, выражае сваю поўную і безагаворачную згоду з гэтай Згодай.',
+    'consent.2.title': '2. Персанальныя даныя, на апрацоўку якіх даецца Згода',
+    'consent.2.p1': 'Карыстальнік дае Згоду на апрацоўку наступных персанальных даных, якія ён паведамляе пры рэгістрацыі і ў працэсе выкарыстання Trackly:',
+    'consent.2.li1': 'прозвішча, імя, імя па бацьку;',
+    'consent.2.li2': 'адрас электроннай пошты;',
+    'consent.2.li3': 'нумар тэлефона (пры яго паказанні);',
+    'consent.2.li4': 'даныя пра эпілептычныя прыпадкі (дата і час, тып прыпадку, працягласць, магчымыя трыгеры, каментары і іншыя звесткі, якія Карыстальнік добраахвотна ўносіць);',
+    'consent.2.li5': 'даныя пра медыкаментозную тэрапію (назва прэпарата, дазіроўка, схема прыёму, факты прыёму);',
+    'consent.2.li6': 'запісы пра самаадчуванне, пабочныя эфекты і іншыя суб\'ектыўныя станы;',
+    'consent.2.li7': 'даныя пра аварыйныя кантакты, указаныя Карыстальнікам (П.І.І., адрасы электроннай пошты, іншыя кантактныя даныя);',
+    'consent.2.li8': 'тэхнічныя даныя, якія могуць аўтаматычна перадавацца пры выкарыстанні Trackly: тып і версія аперацыйнай сістэмы, версія прыкладання, час доступу, ідэнтыфікатар сесіі і іншая падобная інфармацыя, неабходная для карэктнай працы Праграмнага сродку.',
+    'consent.2.p2': 'Уводзячы даныя трэціх асоб (напрыклад, аварыйных кантактаў), Карыстальнік пацвярджае, што атрымаў іх згоду на перадачу іх даных і атрыманне імі аварыйных апавяшчэнняў.',
+    'consent.3.title': '3. Мэты апрацоўкі персанальных даных',
+    'consent.3.p1': 'Персанальныя даныя Карыстальніка апрацоўваюцца ў наступных мэтах:',
+    'consent.3.li1': 'рэгістрацыя Карыстальніка і прадастаўленне доступу да функцыяналу Trackly;',
+    'consent.3.li2': 'вядзенне персанальнага дзённіка эпілептычных прыпадкаў, медыкаментознай тэрапіі і самаадчування;',
+    'consent.3.li3': 'аналіз дынамікі стану здароўя Карыстальніка ў межах функцыяналу Trackly;',
+    'consent.3.li4': 'фарміраванне справаздач для наступнай перадачы лечачаму ўрачу або іншага выкарыстання па меркаванні Карыстальніка;',
+    'consent.3.li5': 'адпраўка аварыйных апавяшчэнняў на адрасы электроннай пошты аварыйных кантактаў, указанных Карыстальнікам;',
+    'consent.3.li6': 'забеспячэнне тэхнічнай працаздольнасці, бяспекі і паляпшэнне якасці працы Trackly;',
+    'consent.3.li7': 'ўзаемадзеянне з Карыстальнікам па пытаннях працы Trackly (адказы на звароты, апавяшчэнні пра важныя змены і інш.).',
+    'consent.4.title': '4. Дзеянні з персанальнымі данымі',
+    'consent.4.p1': 'У рамках гэтай Згоды пад апрацоўкай персанальных даных разумеюцца любыя дзеянні (аперацыі) з персанальнымі данымі, уключаючы:',
+    'consent.4.li1': 'збор, запіс, сістэматызацыю, назапашванне, захоўванне, удакладненне (абнаўленне, змяненне);',
+    'consent.4.li2': 'здабыванне, выкарыстанне, перадачу (прадастаўленне);',
+    'consent.4.li3': 'абясабленне, блакаванне, выдаленне і знішчэнне.',
+    'consent.4.p2': 'Апрацоўка персанальных даных ажыццяўляецца з прымяненнем сродкаў аўтаматызацыі і без іх выкарыстання, з прымяненнем разумных тэхнічных і арганізацыйных мер абароны.',
+    'consent.5.title': '5. Перадача персанальных даных трэцім асобам',
+    'consent.5.p1': 'Персанальныя даныя Карыстальніка могуць перадавацца трэцім асобам у наступных выпадках:',
+    'consent.5.li1': 'па прамым указанні або з выразнай згоды Карыстальніка (напрыклад, пры экспарце справаздачы для ўрача);',
+    'consent.5.li2': 'пры адпраўцы аварыйных апавяшчэнняў на адрасы электроннай пошты аварыйных кантактаў, указанных Карыстальнікам;',
+    'consent.5.li3': 'пры выкарыстанні воблачных сэрвісаў, неабходных для працы Trackly (у тым ліку Supabase PostgreSQL і паштовага сэрвісу Resend) у межах пагадненняў з адпаведнымі пастаўшчыкамі;',
+    'consent.5.li4': 'у выпадках, прама прадугледжаных прымяняльным заканадаўствам.',
+    'consent.5.p2': 'Аварыйныя апавяшчэнні фарміруюцца на падставе даных, уведзеных Карыстальнікам, і адпраўляюцца з адраса alerts@mail.tracklyapp.xyz на адрасы аварыйных кантактаў.',
+    'consent.6.title': '6. Тэрмін дзеяння Згоды і яе адкліканне',
+    'consent.6.p1': 'Згода дзейнічае з моманту яе прыняцця Карыстальнікам (устаноўкі «галачкі» пры рэгістрацыі) і да моманту яе адклікання.',
+    'consent.6.p2': 'Карыстальнік мае права ў любы момант адклікаць сваю Згоду на апрацоўку персанальных даных, накіраваўшы электронны зварот з пазнакай «Адкліканне згоды на апрацоўку персанальных даных» на адрас: jaraslaukunin@gmail.com.',
+    'consent.6.p3': 'Пасля атрымання адклікання Згоды апрацоўка персанальных даных спыняецца, за выключэннем выпадкаў, калі захоўванне даных патрабуецца ў адпаведнасці з заканадаўствам або неабходна для абароны правоў і законных інтарэсаў Аператара. Даныя падлягаюць выдаленню або абясабленню ў разумны тэрмін.',
+    'consent.7.title': '7. Пацвярджэнне Карыстальніка',
+    'consent.7.p1': 'Усталёўваючы адзнаку («галачку») пры рэгістрацыі і/або працягваючы выкарыстанне Trackly, Карыстальнік пацвярджае, што:',
+    'consent.7.li1': 'азнаёміўся з тэкстам гэтай Згоды;',
+    'consent.7.li2': 'разумее яго змест і наступствы прадастаўлення Згоды;',
+    'consent.7.li3': 'прадастаўляе персанальныя даныя добраахвотна;',
+    'consent.7.li4': 'дае згоду на іх апрацоўку на ўмовах, выкладзеных у гэтым дакуменце.'
+  },
+  be: {
+    'consent.pageTitle': 'Zhoda na apračoŭku danychaŭ — Trackly',
+    'consent.back': '← Viarniŭsacca na hałoŭnuju',
+    'consent.title': 'Zhoda na apračoŭku perasanalnych danychaŭ pry vykarystańni Trackly',
+    'consent.meta': 'Hetaja Zhoda vyznačaje umovy apračoŭki perasanalnych danychaŭ karystalnikaŭ Trackly.',
+    'consent.1.title': '1. Ahulnyja palažeńni',
+    'consent.1.p1': 'Hetaja Zhoda na apračoŭku perasanalnych danychaŭ (daliiej — Zhoda) pryznačana dla karystalnikaŭ prahramnaha asiarodku «Trackly» (daliiej — Trackly).',
+    'consent.1.p2': 'Ustalioŭvajučy Trackly, prachodziačy rehistracyju i/abo praciahoŭvajučy vykarystańnie, Karystalnik, staviaučy ptušku ŭ checkbox i ciśnuŭšy knapku rehistracyi/praciahu, vyskazvaje svaju poŭnuju zhodu z hetaj Zhoda.',
+    'consent.2.title': '2. Perasanalnyja danyja, na jakija dajecca Zhoda',
+    'consent.2.p1': 'Karystalnik daje Zhodu na apračoŭku nastupnych perasanalnych danychaŭ, jakija jon paviadvaje pry rehistracyi i ŭ pracesie vykarystańnia Trackly:',
+    'consent.2.li1': 'prouzvišča, imia, imia pa-baćku;',
+    'consent.2.li2': 'adras eliektronnaj pošty;',
+    'consent.2.li3': 'numar tieliefona (kali jon paznačany);',
+    'consent.2.li4': 'danyja pra epilėptyčnyja pryipadki (data i čas, typ, praciahłaść, mahčymyja tryhery, kamientary i inšyja źviestki);',
+    'consent.2.li5': 'danyja pra miedykamentoznuju tėrapiju (nazva, dozіroŭka, schiema, fakty pryjomu);',
+    'consent.2.li6': 'zapisy pra samaadčućcio, pabočnyja efekty i inšyja subjektyŭnyja stany;',
+    'consent.2.li7': 'danyja pra avertujnyja kantakty (imia, adras pošty, inšyja kantakty);',
+    'consent.2.li8': 'techničnyja danyja: AP, viersija prykladannia, čas dostupu, ID siesii i padobnaje.',
+    'consent.2.p2': 'Uvodziačy danyja trecich asob, Karystalnik pacviardžaje, što atrymaŭ ich zhodu na pradaču danychaŭ i atrymańnie avertujnych apaviaščeńniaŭ.',
+    'consent.3.title': '3. Mety apračoŭki perasanalnych danychaŭ',
+    'consent.3.p1': 'Perasanalnyja danyja apračoŭvajucca z nastupnymi mėtami:',
+    'consent.3.li1': 'rehistracyja Karystalnika i pradataŭleńnie dostupu da Trackly;',
+    'consent.3.li2': 'viadzieńnie asabistaha dźiunnika pryipadkaŭ, tėrapii i samaadčućcia;',
+    'consent.3.li3': 'analiz dynamiki zdaroŭja ŭ ramkach Trackly;',
+    'consent.3.li4': 'farmiravańnie spraŭazdač dla lėkara albo inšaha vykarystańnia;',
+    'consent.3.li5': 'adasyłańnie avertujnych apaviaščeńniaŭ kantaktam;',
+    'consent.3.li6': 'zabiespiačeńnie techničnaj biaśpieki i paliapšeńnie Trackly;',
+    'consent.3.li7': 'supra­coŭniańnie z Karystalnikam pa pytanniach pracy Trackly.',
+    'consent.4.title': '4. Dziejańni z perasanalnymi danymi',
+    'consent.4.p1': 'U ramkach hetaj Zhody pad apračoŭkaj razumiejucca lubyja aperacyi z danymi, uključajučy:',
+    'consent.4.li1': 'zbir, zapis, sistėmatyzacyju, nazapašvańnie, zachoŭvańnie, aktualizacyju;',
+    'consent.4.li2': 'vydvikanie, vykarystańnie, piera­dachu;',
+    'consent.4.li3': 'abiazličvańnie, blakavańnie, vydaleńnie i zniščeńnie.',
+    'consent.4.p2': 'Apračoŭka vyko­n­vajecca z i biez aŭtamatyzacyi z razumnymi techničnymi i arhanizacyjnymi mierami abarony.',
+    'consent.5.title': '5. Piera­dacha danychaŭ trecim asobam',
+    'consent.5.p1': 'Danyja mohuć być pieradadzieny trecim asobam:',
+    'consent.5.li1': 'pa pramym ukaze ci z jasnaj zhodы Karystalnika;',
+    'consent.5.li2': 'pačas adasyłańnia avertujnych apaviaščeńniaŭ;',
+    'consent.5.li3': 'pry vykarystańni chmurnych sėrvisaŭ (Supabase, Resend i inš.);',
+    'consent.5.li4': 'kali hetaha vymahaje zakon.',
+    'consent.5.p2': 'Avertujnyja apaviaščeńni dasyłajucca z alerts@mail.tracklyapp.xyz.',
+    'consent.6.title': '6. Tėrmin dziej­ańnia Zhody i jaje adklikańnie',
+    'consent.6.p1': 'Zhoda dzieje z momantu pryjańnia (checkbox pry rehistracyi) da momantu adklikańnia.',
+    'consent.6.p2': 'Karystalnik moža adklikać Zhodu ŭ luby čas, dasyłaŭšy list z paznakaj «Adklikańnie zhodы» na: jaraslaukunin@gmail.com.',
+    'consent.6.p3': 'Paslia adklikańnia Apieratar spyniaje apračoŭku, akramia vypadkaŭ, dzie zakona ci abaro­na pravoŭ Apieratara vymahaje zachoŭvać danyja. Danyja vydalajucca albo abiazličvajucca ŭ razonny tėrmin.',
+    'consent.7.title': '7. Pacviardžeńnie Karystalnika',
+    'consent.7.p1': 'Staviačy checkbox i praciahoŭvajučy vykarystańnie Trackly, Karystalnik pacviardžaje, što:',
+    'consent.7.li1': 'aznajoŭsiŭsia z tekstam Zhody;',
+    'consent.7.li2': 'razumie jaje ŭtrymańnie i nasledki;',
+    'consent.7.li3': 'pradastaŭlaje danyja dobra­varotna;',
+    'consent.7.li4': 'zhodaŭvajecca z apračoŭkaj na ŭmovach, padziedzenych u hetym dakumiencie.'
+  }
+};
+
+function applyConsentLang(lang) {
+  const dict = consentDict[lang] || consentDict.ru;
+  document.documentElement.lang = (lang === 'by' || lang === 'be') ? 'be' : lang;
+  if (dict['consent.pageTitle']) document.title = dict['consent.pageTitle'];
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (dict[key] !== undefined) el.textContent = dict[key];
+  });
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.lang === lang);
+  });
+  localStorage.setItem('trackly-lang', lang);
+}
+
+const savedConsent = localStorage.getItem('trackly-lang') || 'ru';
+applyConsentLang(savedConsent);
+document.querySelectorAll('.lang-btn').forEach(btn => {
+  btn.addEventListener('click', () => applyConsentLang(btn.dataset.lang));
+});
+</script>
+</body>
+</html>

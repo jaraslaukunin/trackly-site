@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title data-i18n="terms.pageTitle">Условия использования — Trackly</title>
+  <style>
+    :root {
+      --bg: #f6f4ef; --surface: rgba(255,255,255,.92); --text: #1f1d1a;
+      --muted: #6e6a63; --line: #ddd6ca; --accent: #8458d6;
+      --shadow: 0 18px 60px rgba(31,29,26,.08); --radius: 20px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(132,88,214,.10), transparent 32%),
+        radial-gradient(circle at top right, rgba(132,88,214,.16), transparent 28%),
+        var(--bg);
+      line-height: 1.65; font-size: 15px;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .shell { width: min(calc(100% - 32px), 980px); margin: 0 auto; }
+    header { position: sticky; top: 0; z-index: 10; backdrop-filter: blur(18px); background: rgba(246,244,239,.94); border-bottom: 1px solid rgba(221,214,202,.7); }
+    .nav { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 72px; }
+    .brand { display: flex; align-items: center; gap: 10px; font-weight: 700; letter-spacing: -.03em; color: inherit; text-decoration: none; }
+    .logo { width: 45px; height: 45px; border-radius: 10px; display: grid; place-items: center; box-shadow: 0 12px 32px rgba(186,160,234,.45); overflow: hidden; }
+    .logo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .logo-placeholder { font-size: 18px; color: #fff; font-weight: 700; display: flex; align-items: center; justify-content: center; }
+    .lang-switch { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+    .lang-btn { padding: 8px 12px; border-radius: 999px; border: 1px solid transparent; background: transparent; color: var(--muted); font-size: 13px; cursor: pointer; transition: .18s ease; }
+    .lang-btn:hover { background: rgba(255,255,255,.95); border-color: var(--line); color: var(--text); }
+    .lang-btn.active { background: #fff; border-color: var(--line); color: var(--text); box-shadow: 0 8px 20px rgba(0,0,0,.06); }
+    main { padding: 22px 0 32px; }
+    .doc-card { margin-top: 16px; background: var(--surface); border-radius: var(--radius); border: 1px solid rgba(255,255,255,.8); box-shadow: var(--shadow); padding: 22px 22px 26px; }
+    .back-link { display: inline-flex; align-items: center; gap: 6px; font-size: 14px; color: var(--muted); text-decoration: none; margin-top: 16px; margin-bottom: 8px; }
+    .back-link:hover { color: var(--text); text-decoration: underline; }
+    h1 { margin: 4px 0 6px; font-size: 26px; letter-spacing: -.03em; }
+    .doc-meta { margin: 0 0 16px; font-size: 13px; color: var(--muted); }
+    h2 { margin: 18px 0 6px; font-size: 19px; letter-spacing: -.02em; }
+    p { margin: 6px 0; }
+    ul { margin: 4px 0 10px 18px; padding: 0; }
+    li { margin: 3px 0; }
+    @media (max-width: 720px) {
+      .nav { flex-direction: column; align-items: flex-start; padding: 10px 0 8px; }
+      .doc-card { padding: 18px 16px 22px; }
+      h1 { font-size: 22px; } h2 { font-size: 17px; }
+    }
+  </style>
+</head>
+<body>
+<header>
+  <div class="shell nav">
+    <a class="brand" href="./index.html">
+      <span class="logo">
+        <img src="logo_transparent.svg" alt="Trackly"
+             onerror="this.style.display='none';this.previousElementSibling&&this.previousElementSibling.classList.add('logo-placeholder')">
+        <span class="logo-placeholder">T</span>
+      </span>
+      <span>Trackly</span>
+    </a>
+    <div class="lang-switch">
+      <button class="lang-btn" data-lang="ru">RU</button>
+      <button class="lang-btn" data-lang="en">EN</button>
+      <button class="lang-btn" data-lang="by">BY</button>
+      <button class="lang-btn" data-lang="be">BE</button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="shell">
+    <a href="./index.html" class="back-link" data-i18n="terms.back">← Вернуться на главную</a>
+    <article class="doc-card">
+      <h1 data-i18n="terms.title">Условия использования программного средства «Trackly»</h1>
+      <p class="doc-meta" data-i18n="terms.meta">Настоящие Условия определяют порядок использования программного средства персонального мониторинга состояния и медикаментозного лечения пациентов с эпилепсией «Trackly», а также права и обязанности Пользователя.</p>
+
+      <h2 data-i18n="terms.1.title">1. Общие положения</h2>
+      <p data-i18n="terms.1.p1">Настоящие Условия использования (далее — Условия) регулируют порядок использования программного средства «Trackly» (далее — Программное средство, Trackly) и права и обязанности Пользователя.</p>
+      <p data-i18n="terms.1.p2">Устанавливая Trackly, проходя регистрацию и/или продолжая использование Программного средства, Пользователь подтверждает, что ознакомился с настоящими Условиями, Политикой конфиденциальности и Согласием на обработку персональных данных и принимает их в полном объёме.</p>
+
+      <h2 data-i18n="terms.2.title">2. Назначение Программного средства</h2>
+      <p data-i18n="terms.2.p1">Trackly предназначено для ведения персонального электронного журнала эпилептических приступов, медикаментозной терапии, самочувствия, а также формирования отчётов для последующей передачи лечащему врачу.</p>
+      <p data-i18n="terms.2.p2">Trackly не является медицинским изделием, медицинской услугой или средством диагностики и не заменяет консультации врача. Все решения, связанные со здоровьем и лечением, Пользователь принимает самостоятельно совместно с квалифицированным медицинским специалистом.</p>
+
+      <h2 data-i18n="terms.3.title">3. Регистрация и учётная запись</h2>
+      <p data-i18n="terms.3.p1">Для использования полного функционала Trackly Пользователь проходит процедуру регистрации и создаёт учётную запись.</p>
+      <p data-i18n="terms.3.p2">Пользователь обязан предоставить точную и актуальную информацию при регистрации и поддерживать её в актуальном состоянии.</p>
+      <p data-i18n="terms.3.p3">Пользователь несёт ответственность за сохранность своих учётных данных (логина и пароля), а также за все действия, совершённые через его учётную запись.</p>
+
+      <h2 data-i18n="terms.4.title">4. Правила использования Trackly</h2>
+      <p data-i18n="terms.4.p1">Пользователь вправе использовать Trackly исключительно для личных, некоммерческих целей, связанных с ведением собственного журнала состояния здоровья.</p>
+      <p data-i18n="terms.4.p2">Пользователь обязуется не использовать Trackly для:</p>
+      <ul>
+        <li data-i18n="terms.4.li1">нарушения прав и законных интересов третьих лиц;</li>
+        <li data-i18n="terms.4.li2">внесения заведомо ложных персональных данных или данных третьих лиц без их согласия;</li>
+        <li data-i18n="terms.4.li3">попыток несанкционированного доступа к данным других пользователей или к технической инфраструктуре Trackly;</li>
+        <li data-i18n="terms.4.li4">распространения вредоносного программного обеспечения либо совершения иных действий, способных нарушить работу Trackly.</li>
+      </ul>
+      <p data-i18n="terms.4.p3">При указании данных экстренных контактов Пользователь подтверждает, что получил согласие этих лиц на использование их контактной информации для отправки экстренных оповещений.</p>
+
+      <h2 data-i18n="terms.5.title">5. Экстренные оповещения</h2>
+      <p data-i18n="terms.5.p1">Trackly может отправлять экстренные оповещения на адреса электронной почты экстренных контактов, указанных Пользователем, в случаях, инициируемых самим Пользователем (например, при нажатии соответствующей кнопки в Программном средстве).</p>
+      <p data-i18n="terms.5.p2">Экстренные оповещения отправляются с адреса электронной почты alerts@mail.tracklyapp.xyz и могут содержать информацию, введённую Пользователем в Trackly.</p>
+      <p data-i18n="terms.5.p3">Пользователь несёт ответственность за корректность указанных контактных данных экстренных контактов и за содержание информации, на основе которой формируются экстренные сообщения.</p>
+
+      <h2 data-i18n="terms.6.title">6. Персональные данные и конфиденциальность</h2>
+      <p data-i18n="terms.6.p1">Обработка персональных данных Пользователя осуществляется в соответствии с Политикой конфиденциальности и Согласием на обработку персональных данных, которые являются неотъемлемой частью настоящих Условий.</p>
+      <p data-i18n="terms.6.p2">Продолжая использование Trackly, Пользователь подтверждает своё согласие на обработку персональных данных в объёме и на условиях, предусмотренных указанными документами.</p>
+
+      <h2 data-i18n="terms.7.title">7. Ограничение ответственности</h2>
+      <p data-i18n="terms.7.p1">Программное средство Trackly предоставляется по принципу «как есть».</p>
+      <p data-i18n="terms.7.p2">Оператор не гарантирует абсолютную непрерывность и безошибочность работы Trackly, а также полное соответствие Программного средства субъективным ожиданиям Пользователя.</p>
+      <p data-i18n="terms.7.p3">Оператор не несёт ответственности за:</p>
+      <ul>
+        <li data-i18n="terms.7.li1">решения в области лечения и здоровья, принимаемые Пользователем на основании данных, хранящихся в Trackly;</li>
+        <li data-i18n="terms.7.li2">некорректное или неполное указание Пользователем своих персональных данных и данных экстренных контактов;</li>
+        <li data-i18n="terms.7.li3">невозможность использования Trackly по причинам, не зависящим от Оператора (сбои сетевой инфраструктуры, оборудования, сторонних сервисов и др.).</li>
+      </ul>
+      <p data-i18n="terms.7.p4">Пользователь обязан самостоятельно консультироваться с врачом по вопросам диагностики, лечения и изменения схемы терапии.</p>
+
+      <h2 data-i18n="terms.8.title">8. Изменение Условий</h2>
+      <p data-i18n="terms.8.p1">Оператор вправе изменять настоящие Условия. Обновлённая версия Условий вступает в силу с момента её размещения вместе с документацией на Trackly или доведения до сведения Пользователя иным способом, если иное не предусмотрено новой редакцией.</p>
+      <p data-i18n="terms.8.p2">Продолжая использование Trackly после вступления изменений в силу, Пользователь подтверждает своё согласие с обновлёнными Условиями.</p>
+
+      <h2 data-i18n="terms.9.title">9. Обратная связь</h2>
+      <p data-i18n="terms.9.p1">По вопросам, связанным с использованием Trackly, а также по вопросам персональных данных и конфиденциальности, Пользователь может обратиться к Оператору по адресу электронной почты: <a href="mailto:jaraslaukunin@gmail.com">jaraslaukunin@gmail.com</a>.</p>
+    </article>
+  </div>
+</main>
+
+<script>
+const termsDict = {
+  ru: {
+    'terms.pageTitle': 'Условия использования — Trackly',
+    'terms.back': '← Вернуться на главную',
+    'terms.title': 'Условия использования программного средства «Trackly»',
+    'terms.meta': 'Настоящие Условия определяют порядок использования программного средства персонального мониторинга состояния и медикаментозного лечения пациентов с эпилепсией «Trackly», а также права и обязанности Пользователя.',
+    'terms.1.title': '1. Общие положения',
+    'terms.1.p1': 'Настоящие Условия использования (далее — Условия) регулируют порядок использования программного средства «Trackly» (далее — Программное средство, Trackly) и права и обязанности Пользователя.',
+    'terms.1.p2': 'Устанавливая Trackly, проходя регистрацию и/или продолжая использование Программного средства, Пользователь подтверждает, что ознакомился с настоящими Условиями, Политикой конфиденциальности и Согласием на обработку персональных данных и принимает их в полном объёме.',
+    'terms.2.title': '2. Назначение Программного средства',
+    'terms.2.p1': 'Trackly предназначено для ведения персонального электронного журнала эпилептических приступов, медикаментозной терапии, самочувствия, а также формирования отчётов для последующей передачи лечащему врачу.',
+    'terms.2.p2': 'Trackly не является медицинским изделием, медицинской услугой или средством диагностики и не заменяет консультации врача. Все решения, связанные со здоровьем и лечением, Пользователь принимает самостоятельно совместно с квалифицированным медицинским специалистом.',
+    'terms.3.title': '3. Регистрация и учётная запись',
+    'terms.3.p1': 'Для использования полного функционала Trackly Пользователь проходит процедуру регистрации и создаёт учётную запись.',
+    'terms.3.p2': 'Пользователь обязан предоставить точную и актуальную информацию при регистрации и поддерживать её в актуальном состоянии.',
+    'terms.3.p3': 'Пользователь несёт ответственность за сохранность своих учётных данных (логина и пароля), а также за все действия, совершённые через его учётную запись.',
+    'terms.4.title': '4. Правила использования Trackly',
+    'terms.4.p1': 'Пользователь вправе использовать Trackly исключительно для личных, некоммерческих целей, связанных с ведением собственного журнала состояния здоровья.',
+    'terms.4.p2': 'Пользователь обязуется не использовать Trackly для:',
+    'terms.4.li1': 'нарушения прав и законных интересов третьих лиц;',
+    'terms.4.li2': 'внесения заведомо ложных персональных данных или данных третьих лиц без их согласия;',
+    'terms.4.li3': 'попыток несанкционированного доступа к данным других пользователей или к технической инфраструктуре Trackly;',
+    'terms.4.li4': 'распространения вредоносного программного обеспечения либо совершения иных действий, способных нарушить работу Trackly.',
+    'terms.4.p3': 'При указании данных экстренных контактов Пользователь подтверждает, что получил согласие этих лиц на использование их контактной информации для отправки экстренных оповещений.',
+    'terms.5.title': '5. Экстренные оповещения',
+    'terms.5.p1': 'Trackly может отправлять экстренные оповещения на адреса электронной почты экстренных контактов, указанных Пользователем, в случаях, инициируемых самим Пользователем (например, при нажатии соответствующей кнопки в Программном средстве).',
+    'terms.5.p2': 'Экстренные оповещения отправляются с адреса электронной почты alerts@mail.tracklyapp.xyz и могут содержать информацию, введённую Пользователем в Trackly.',
+    'terms.5.p3': 'Пользователь несёт ответственность за корректность указанных контактных данных экстренных контактов и за содержание информации, на основе которой формируются экстренные сообщения.',
+    'terms.6.title': '6. Персональные данные и конфиденциальность',
+    'terms.6.p1': 'Обработка персональных данных Пользователя осуществляется в соответствии с Политикой конфиденциальности и Согласием на обработку персональных данных, которые являются неотъемлемой частью настоящих Условий.',
+    'terms.6.p2': 'Продолжая использование Trackly, Пользователь подтверждает своё согласие на обработку персональных данных в объёме и на условиях, предусмотренных указанными документами.',
+    'terms.7.title': '7. Ограничение ответственности',
+    'terms.7.p1': 'Программное средство Trackly предоставляется по принципу «как есть».',
+    'terms.7.p2': 'Оператор не гарантирует абсолютную непрерывность и безошибочность работы Trackly, а также полное соответствие Программного средства субъективным ожиданиям Пользователя.',
+    'terms.7.p3': 'Оператор не несёт ответственности за:',
+    'terms.7.li1': 'решения в области лечения и здоровья, принимаемые Пользователем на основании данных, хранящихся в Trackly;',
+    'terms.7.li2': 'некорректное или неполное указание Пользователем своих персональных данных и данных экстренных контактов;',
+    'terms.7.li3': 'невозможность использования Trackly по причинам, не зависящим от Оператора (сбои сетевой инфраструктуры, оборудования, сторонних сервисов и др.).',
+    'terms.7.p4': 'Пользователь обязан самостоятельно консультироваться с врачом по вопросам диагностики, лечения и изменения схемы терапии.',
+    'terms.8.title': '8. Изменение Условий',
+    'terms.8.p1': 'Оператор вправе изменять настоящие Условия. Обновлённая версия Условий вступает в силу с момента её размещения вместе с документацией на Trackly или доведения до сведения Пользователя иным способом, если иное не предусмотрено новой редакцией.',
+    'terms.8.p2': 'Продолжая использование Trackly после вступления изменений в силу, Пользователь подтверждает своё согласие с обновлёнными Условиями.',
+    'terms.9.title': '9. Обратная связь',
+    'terms.9.p1': 'По вопросам, связанным с использованием Trackly, а также по вопросам персональных данных и конфиденциальности, Пользователь может обратиться к Оператору по адресу электронной почты: jaraslaukunin@gmail.com.'
+  },
+  en: {
+    'terms.pageTitle': 'Terms of Use — Trackly',
+    'terms.back': '← Back to main page',
+    'terms.title': 'Terms of Use for the Trackly software',
+    'terms.meta': 'These Terms govern the use of the Trackly personal monitoring software for epilepsy and define the rights and obligations of the User.',
+    'terms.1.title': '1. General provisions',
+    'terms.1.p1': 'These Terms of Use (the Terms) govern the use of the Trackly software (the Software, Trackly) and define the rights and obligations of the User.',
+    'terms.1.p2': 'By installing Trackly, registering and/or continuing to use the Software, the User confirms that they have read these Terms, the Privacy Policy and the Data Processing Consent and accept them in full.',
+    'terms.2.title': '2. Purpose of the Software',
+    'terms.2.p1': 'Trackly is intended for keeping a personal electronic journal of epileptic seizures, medication therapy, wellbeing, and for generating reports for the attending physician.',
+    'terms.2.p2': 'Trackly is not a medical device, medical service or diagnostic tool and does not replace a doctor\'s consultation. All health and treatment decisions are made by the User together with a qualified medical specialist.',
+    'terms.3.title': '3. Registration and account',
+    'terms.3.p1': 'To use the full functionality of Trackly, the User must register and create an account.',
+    'terms.3.p2': 'The User must provide accurate and up-to-date information during registration and keep it current.',
+    'terms.3.p3': 'The User is responsible for keeping login credentials safe and for all actions taken through their account.',
+    'terms.4.title': '4. Rules for using Trackly',
+    'terms.4.p1': 'The User may use Trackly only for personal, non-commercial purposes related to keeping their own health journal.',
+    'terms.4.p2': 'The User agrees not to use Trackly to:',
+    'terms.4.li1': 'violate the rights and lawful interests of third parties;',
+    'terms.4.li2': 'enter knowingly false personal data or data of third parties without their consent;',
+    'terms.4.li3': 'attempt unauthorised access to other users\' data or Trackly infrastructure;',
+    'terms.4.li4': 'distribute malware or perform other actions that may disrupt Trackly.',
+    'terms.4.p3': 'When providing emergency contacts, the User confirms that those persons consented to receiving emergency notifications.',
+    'terms.5.title': '5. Emergency notifications',
+    'terms.5.p1': 'Trackly may send emergency notifications to email addresses of emergency contacts specified by the User when initiated by the User (for example, when pressing the corresponding button).',
+    'terms.5.p2': 'Emergency notifications are sent from alerts@mail.tracklyapp.xyz and may contain information entered by the User in Trackly.',
+    'terms.5.p3': 'The User is responsible for the correctness of emergency contact details and the content of information used to form emergency messages.',
+    'terms.6.title': '6. Personal data and privacy',
+    'terms.6.p1': 'Processing of personal data is carried out in accordance with the Privacy Policy and the Data Processing Consent, which are integral parts of these Terms.',
+    'terms.6.p2': 'By continuing to use Trackly, the User confirms their consent to personal data processing to the extent and on the conditions described in those documents.',
+    'terms.7.title': '7. Limitation of liability',
+    'terms.7.p1': 'Trackly is provided "as is".',
+    'terms.7.p2': 'The Operator does not guarantee uninterrupted or error-free operation of Trackly or full compliance with the User\'s expectations.',
+    'terms.7.p3': 'The Operator is not liable for:',
+    'terms.7.li1': 'health and treatment decisions made by the User based on data stored in Trackly;',
+    'terms.7.li2': 'incorrect or incomplete personal data and emergency contacts provided by the User;',
+    'terms.7.li3': 'inability to use Trackly due to reasons beyond the Operator\'s control (network failures, hardware issues, third-party service outages, etc.).',
+    'terms.7.p4': 'The User must consult a doctor independently on diagnosis, treatment, and therapy adjustments.',
+    'terms.8.title': '8. Changes to the Terms',
+    'terms.8.p1': 'The Operator may amend these Terms. The updated version becomes effective upon being published with the Trackly documentation or otherwise communicated to the User unless otherwise specified.',
+    'terms.8.p2': 'By continuing to use Trackly after changes take effect, the User confirms their agreement with the updated Terms.',
+    'terms.9.title': '9. Feedback',
+    'terms.9.p1': 'For questions about using Trackly and about personal data and privacy, the User can contact the Operator at: jaraslaukunin@gmail.com.'
+  },
+  by: {
+    'terms.pageTitle': 'Умовы выкарыстання — Trackly',
+    'terms.back': '← Вярнуцца на галоўную',
+    'terms.title': 'Умовы выкарыстання праграмнага сродку «Trackly»',
+    'terms.meta': 'Гэтыя Умовы вызначаюць парадак выкарыстання праграмнага сродку «Trackly», а таксама правы і абавязкі Карыстальніка.',
+    'terms.1.title': '1. Агульныя палажэнні',
+    'terms.1.p1': 'Гэтыя Умовы выкарыстання (далей — Умовы) рэгулююць парадак выкарыстання праграмнага сродку «Trackly» (далей — Праграмны сродак, Trackly) і вызначаюць правы і абавязкі Карыстальніка.',
+    'terms.1.p2': 'Усталёўваючы Trackly, праходзячы рэгістрацыю і/або працягваючы выкарыстанне, Карыстальнік пацвярджае, што азнаёміўся з гэтым Умовамі, Палітыкай канфідэнцыяльнасці і Згодай на апрацоўку персанальных даных і прымае іх у поўным аб\'ёме.',
+    'terms.2.title': '2. Прызначэнне Праграмнага сродку',
+    'terms.2.p1': 'Trackly прызначана для вядзення персанальнага электроннага дзённіка эпілептычных прыпадкаў, медыкаментознай тэрапіі, самаадчування, а таксама фарміравання справаздач для наступнай перадачы лечачаму ўрачу.',
+    'terms.2.p2': 'Trackly не з\'яўляецца медыцынскім вырабам, медыцынскай паслугай або сродкам дыягностыкі і не замяняе кансультацыі ўрача. Усе рашэнні, звязаныя са здароўем і лячэннем, Карыстальнік прымае самастойна разам з кваліфікаваным медыцынскім спецыялістам.',
+    'terms.3.title': '3. Рэгістрацыя і ўліковы запіс',
+    'terms.3.p1': 'Для выкарыстання поўнага функцыяналу Trackly Карыстальнік праходзіць рэгістрацыю і стварае ўліковы запіс.',
+    'terms.3.p2': 'Карыстальнік абавязаны прадаставіць дакладную і актуальную інфармацыю пры рэгістрацыі і падтрымліваць яе ў актуальным стане.',
+    'terms.3.p3': 'Карыстальнік нясе адказнасць за захаванасць сваіх уліковых даных (лагіна і пароля), а таксама за ўсе дзеянні, здзейсненыя праз яго ўліковы запіс.',
+    'terms.4.title': '4. Правілы выкарыстання Trackly',
+    'terms.4.p1': 'Карыстальнік мае права выкарыстоўваць Trackly выключна для асабістых, некамерцыйных мэт, звязаных з вядзеннем уласнага дзённіка стану здароўя.',
+    'terms.4.p2': 'Карыстальнік абавязуецца не выкарыстоўваць Trackly для:',
+    'terms.4.li1': 'парушэння правоў і законных інтарэсаў трэціх асоб;',
+    'terms.4.li2': 'ўнясення свядома ілжывых персанальных даных або даных трэціх асоб без іх згоды;',
+    'terms.4.li3': 'спробаў несанкцыянаванага доступу да даных іншых карыстальнікаў або да тэхнічнай інфраструктуры Trackly;',
+    'terms.4.li4': 'распаўсюджвання шкоднаснага праграмнага забеспячэння або здзяйснення іншых дзеянняў, здольных парушыць працу Trackly.',
+    'terms.4.p3': 'Паказваючы даныя аварыйных кантактаў, Карыстальнік пацвярджае, што атрымаў згоду гэтых асоб на выкарыстанне іх кантактнай інфармацыі для адпраўкі аварыйных апавяшчэнняў.',
+    'terms.5.title': '5. Аварыйныя апавяшчэнні',
+    'terms.5.p1': 'Trackly можа адпраўляць аварыйныя апавяшчэнні на адрасы электроннай пошты аварыйных кантактаў, указанных Карыстальнікам, у выпадках, ініцыяваных самім Карыстальнікам.',
+    'terms.5.p2': 'Аварыйныя апавяшчэнні адпраўляюцца з адраса alerts@mail.tracklyapp.xyz і могуць змяшчаць інфармацыю, уведзеную Карыстальнікам у Trackly.',
+    'terms.5.p3': 'Карыстальнік нясе адказнасць за карэктнасць указаных кантактных даных аварыйных кантактаў і за змест інфармацыі, на падставе якой фарміруюцца аварыйныя паведамленні.',
+    'terms.6.title': '6. Персанальныя даныя і канфідэнцыяльнасць',
+    'terms.6.p1': 'Апрацоўка персанальных даных Карыстальніка ажыццяўляецца ў адпаведнасці з Палітыкай канфідэнцыяльнасці і Згодай на апрацоўку персанальных даных, якія з\'яўляюцца неад\'емнай часткай гэтых Умоў.',
+    'terms.6.p2': 'Працягваючы выкарыстанне Trackly, Карыстальнік пацвярджае сваю згоду на апрацоўку персанальных даных у аб\'ёме і на ўмовах, прадугледжаных названымі дакументамі.',
+    'terms.7.title': '7. Абмежаванне адказнасці',
+    'terms.7.p1': 'Праграмны сродак Trackly прадастаўляецца па прынцыпу «як ёсць».',
+    'terms.7.p2': 'Аператар не гарантуе абсалютную бесперапыннасць і бездакорнасць працы Trackly, а таксама поўную адпаведнасць Праграмнага сродку суб\'ектыўным чаканням Карыстальніка.',
+    'terms.7.p3': 'Аператар не нясе адказнасці за:',
+    'terms.7.li1': 'рашэнні ў галіне лячэння і здароўя, якія Карыстальнік прымае на падставе даных, якія захоўваюцца ў Trackly;',
+    'terms.7.li2': 'некарэктнае або няпоўнае ўказанне Карыстальнікам сваіх персанальных даных і даных аварыйных кантактаў;',
+    'terms.7.li3': 'немагчымасць выкарыстання Trackly па прычынах, якія не залежаць ад Аператара (збоі сеткавай інфраструктуры, абсталявання, старонніх сэрвісаў і інш.).',
+    'terms.7.p4': 'Карыстальнік абавязаны самастойна кансультавацца з урачом па пытаннях дыягностыкі, лячэння і змены схемы тэрапіі.',
+    'terms.8.title': '8. Змяненне Умоў',
+    'terms.8.p1': 'Аператар мае права змяняць гэтыя Умовы. Абноўленая версія Умоў уступае ў сілу з моманту яе размяшчэння разам з дакументацыяй на Trackly або даведзення да ведама Карыстальніка іншым спосабам.',
+    'terms.8.p2': 'Працягваючы выкарыстанне Trackly пасля ўступлення змен у сілу, Карыстальнік пацвярджае сваю згоду з абноўленымі Умовамі.',
+    'terms.9.title': '9. Зваротная сувязь',
+    'terms.9.p1': 'Па пытаннях, звязаных з выкарыстаннем Trackly, а таксама па пытаннях персанальных даных і канфідэнцыяльнасці, Карыстальнік можа звярнуцца да Аператара па адрасе электроннай пошты: jaraslaukunin@gmail.com.'
+  },
+  be: {
+    'terms.pageTitle': 'Umovy vykarystańnia — Trackly',
+    'terms.back': '← Viarniŭsacca na hałoŭnuju',
+    'terms.title': 'Umovy vykarystańnia prahramnaha asiarodku «Trackly»',
+    'terms.meta': 'Hetyja Umovy vyznačajuć paradak vykarystańnia Trackly i pravy Karystalnika.',
+    'terms.1.title': '1. Ahulnyja palažeńni',
+    'terms.1.p1': 'Hetyja Umovy vykarystańnia (daliiej — Umovy) rėhuliujuć paradak vykarystańnia Trackly i vyznačajuć pravy i abaviazki Karystalnika.',
+    'terms.1.p2': 'Ustalioŭvajučy Trackly, prachodziačy rehistracyju i/abo praciahoŭvajučy vykarystańnie, Karystalnik pacviardžaje, što aznajoŭsiŭsia z hetymi Umovami, Palitykaj kanfidecyjnaści i Zhodaj i prymaje ich u poŭnym ab\'jomie.',
+    'terms.2.title': '2. Pryznačeńnie Prahramnaha asiarodku',
+    'terms.2.p1': 'Trackly pryznačana dla viadzieńnia asabistaга dźiunnika pryipadkaŭ epilėpsii, miedykamentoznaj tėrapii, samaadčućcia i farmiravańnia spraŭazdač dla lėkara.',
+    'terms.2.p2': 'Trackly nie źjaŭlajecca miedycynskim vyrobam ci dyjahnostyčnym srodkam i nie zamianjaje kancultatcyi ŭracha. Usie miedycynskija rašeńni Karystalnik prymaje razam z kvalifikavanym uračom.',
+    'terms.3.title': '3. Rehistracyja i akaŭnt',
+    'terms.3.p1': 'Kab vykarystoŭvać poŭny funkcyjanal Trackly, Karystalnik rehistrujecca i stvaraje akaŭnt.',
+    'terms.3.p2': 'Karystalnik pavinien pradastaŭljać dakładnuju i aktualnuju infarmacyju pry rehistracyi i padtrymlivać jaje ŭ aktualnym stanie.',
+    'terms.3.p3': 'Karystalnik niesie adkaznasć za zachavańnie svaich ulikovych danychaŭ i za ŭsie dziejańni, zdziejsnienyja praz jaho akaŭnt.',
+    'terms.4.title': '4. Pravily vykarystańnia Trackly',
+    'terms.4.p1': 'Karystalnik moža vykarystoŭvać Trackly tolki dla asabistych, niekamiercyjnych mėtaŭ.',
+    'terms.4.p2': 'Karystalnik zhodaŭvajecca nie vykarystoŭvać Trackly dla:',
+    'terms.4.li1': 'narušeńnia pravoŭ trecich asob;',
+    'terms.4.li2': 'ŭvieadziennia sviadoma ilžyvych danychaŭ ci danychaŭ trecich asob biez ich zhodы;',
+    'terms.4.li3': 'sprob nie­sankcyjavanaha dostupu da danychaŭ inšych karystalnikaŭ ci infrastruktury Trackly;',
+    'terms.4.li4': 'raspaŭsiudžańnia škodasnaha prahramnaha zabiespiačeńnia ci inšych dziejańniaŭ, jakija mohuć parušyć pracy Trackly.',
+    'terms.4.p3': 'Paznačajučy avertujnyja kantakty, Karystalnik pacviardžaje, što atrymaŭ ich zhodu na atrymańnie avertujnych apaviaščeńniaŭ.',
+    'terms.5.title': '5. Avertujnyja apaviaščeńni',
+    'terms.5.p1': 'Trackly moža dasyłać avertujnyja apaviaščeńni na adrasy avertujnych kantaktaŭ pa iniciyatyvie Karystalnika.',
+    'terms.5.p2': 'Apaviaščeńni dasyłajucca z alerts@mail.tracklyapp.xyz i mohuć źmiasčać infarmacyju z Trackly.',
+    'terms.5.p3': 'Karystalnik niesie adkaznasć za dakładnasć kantaktnych danychaŭ i źmiest avertujnych paviedamleńniaŭ.',
+    'terms.6.title': '6. Perasanalnyja danyja i kanfidecyjnaść',
+    'terms.6.p1': 'Apračoŭka danychaŭ vykońvajecca ŭ adpaviednaści z Palitykaj kanfidecyjnaści i Zhodaj, jakija źjaŭlajucca niead\'iemaj častkaj hetych Umoŭ.',
+    'terms.6.p2': 'Praciahoŭvajučy vykarystańnie Trackly, Karystalnik pacviardžaje zhodu na apračoŭku danychaŭ na ŭmovach hetych dakumientaŭ.',
+    'terms.7.title': '7. Abmiežavańnie adkaznasci',
+    'terms.7.p1': 'Trackly pradastaŭlajecca «jak jość».',
+    'terms.7.p2': 'Apieratar nie harantuje absalutnaj biespierapynnaści i biezpamylkovaści pracy Trackly.',
+    'terms.7.p3': 'Apieratar nie niesie adkaznasci za:',
+    'terms.7.li1': 'miedycynskija rašeńni Karystalnika na padstave danychaŭ z Trackly;',
+    'terms.7.li2': 'niekarektnyja albo nia­poŭnyja danyja, uviedzienyja Karystalnikam;',
+    'terms.7.li3': 'niemahčymaść vykarystańnia Trackly pa pryčynach, nie zaležnych ad Apieratara.',
+    'terms.7.p4': 'Karystalnik pavinien samastojna kancultavacca z uračom pa pytanniach zdaroŭja i tėrapii.',
+    'terms.8.title': '8. Zmieny Umoŭ',
+    'terms.8.p1': 'Apieratar moža zmianić hetyja Umovy. Novaja viersija ŭstupaje ŭ siłu z momantu apublikavańnia.',
+    'terms.8.p2': 'Praciahoŭvajučy vykarystańnie paslia zmien, Karystalnik zhodaŭvajecca z abnoŭlenymi Umovami.',
+    'terms.9.title': '9. Zvarotnaja suviaz\'',
+    'terms.9.p1': 'Pa pytanniach ab Trackly i perasanalnych danychaŭ možna zvarnucca da Apieratara: jaraslaukunin@gmail.com.'
+  }
+};
+
+function applyTermsLang(lang) {
+  const dict = termsDict[lang] || termsDict.ru;
+  document.documentElement.lang = (lang === 'by' || lang === 'be') ? 'be' : lang;
+  if (dict['terms.pageTitle']) document.title = dict['terms.pageTitle'];
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (dict[key] !== undefined) el.textContent = dict[key];
+  });
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.lang === lang);
+  });
+  localStorage.setItem('trackly-lang', lang);
+}
+
+const savedTerms = localStorage.getItem('trackly-lang') || 'ru';
+applyTermsLang(savedTerms);
+document.querySelectorAll('.lang-btn').forEach(btn => {
+  btn.addEventListener('click', () => applyTermsLang(btn.dataset.lang));
+});
+</script>
+</body>
+</html>

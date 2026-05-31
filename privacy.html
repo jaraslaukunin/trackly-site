@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title data-i18n="privacy.pageTitle">Политика конфиденциальности — Trackly</title>
+  <style>
+    :root {
+      --bg: #f6f4ef;
+      --surface: rgba(255,255,255,.92);
+      --text: #1f1d1a;
+      --muted: #6e6a63;
+      --line: #ddd6ca;
+      --accent: #8458d6;
+      --shadow: 0 18px 60px rgba(31,29,26,.08);
+      --radius: 20px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(132,88,214,.10), transparent 32%),
+        radial-gradient(circle at top right, rgba(132,88,214,.16), transparent 28%),
+        var(--bg);
+      line-height: 1.65;
+      font-size: 15px;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .shell { width: min(calc(100% - 32px), 980px); margin: 0 auto; }
+
+    header {
+      position: sticky; top: 0; z-index: 10;
+      backdrop-filter: blur(18px);
+      background: rgba(246,244,239,.94);
+      border-bottom: 1px solid rgba(221,214,202,.7);
+    }
+    .nav {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 16px; min-height: 72px;
+    }
+    .brand {
+      display: flex; align-items: center; gap: 10px;
+      font-weight: 700; letter-spacing: -.03em;
+      color: inherit; text-decoration: none;
+    }
+    .logo {
+      width: 45px; height: 45px; border-radius: 10px;
+      display: grid; place-items: center;
+      box-shadow: 0 12px 32px rgba(186,160,234,.45);
+      overflow: hidden;
+    }
+    .logo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .logo-placeholder {
+      font-size: 18px; color: #fff; font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .lang-switch {
+      display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+    }
+    .lang-btn {
+      padding: 8px 12px; border-radius: 999px;
+      border: 1px solid transparent;
+      background: transparent;
+      color: var(--muted);
+      font-size: 13px;
+      cursor: pointer;
+      transition: .18s ease;
+    }
+    .lang-btn:hover {
+      background: rgba(255,255,255,.95);
+      border-color: var(--line);
+      color: var(--text);
+    }
+    .lang-btn.active {
+      background: #fff;
+      border-color: var(--line);
+      color: var(--text);
+      box-shadow: 0 8px 20px rgba(0,0,0,.06);
+    }
+
+    main { padding: 22px 0 32px; }
+    .doc-card {
+      margin-top: 16px;
+      background: var(--surface);
+      border-radius: var(--radius);
+      border: 1px solid rgba(255,255,255,.8);
+      box-shadow: var(--shadow);
+      padding: 22px 22px 26px;
+    }
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 14px;
+      color: var(--muted);
+      text-decoration: none;
+      margin-top: 16px;
+      margin-bottom: 8px;
+    }
+    .back-link span.icon {
+      font-size: 18px;
+      line-height: 1;
+    }
+    .back-link:hover {
+      color: var(--text);
+      text-decoration: underline;
+    }
+
+    h1 {
+      margin: 4px 0 6px;
+      font-size: 26px;
+      letter-spacing: -.03em;
+    }
+    .doc-meta {
+      margin: 0 0 16px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+    h2 {
+      margin: 18px 0 6px;
+      font-size: 19px;
+      letter-spacing: -.02em;
+    }
+    p { margin: 6px 0; }
+    ul { margin: 4px 0 10px 18px; padding: 0; }
+    li { margin: 3px 0; }
+    strong { font-weight: 600; }
+
+    .table-wrap {
+      margin: 10px 0 14px;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      overflow: hidden;
+      background: #fbfaf7;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+    th, td {
+      border-bottom: 1px solid #e3dbcf;
+      padding: 9px 10px;
+      vertical-align: top;
+      text-align: left;
+    }
+    th {
+      background: #f3eee4;
+      font-weight: 600;
+      font-size: 13px;
+    }
+    tr:last-child td { border-bottom: none; }
+
+    @media (max-width: 720px) {
+      .nav { flex-direction: column; align-items: flex-start; padding: 10px 0 8px; }
+      .doc-card { padding: 18px 16px 22px; }
+      h1 { font-size: 22px; }
+      h2 { font-size: 17px; }
+    }
+  </style>
+</head>
+<body>
+<header>
+  <div class="shell nav">
+    <a class="brand" href="./index.html">
+      <span class="logo">
+        <img src="logo_transparent.svg" alt="Trackly"
+             onerror="this.style.display='none';this.previousElementSibling&&this.previousElementSibling.classList.add('logo-placeholder')">
+        <span class="logo-placeholder">T</span>
+      </span>
+      <span>Trackly</span>
+    </a>
+    <div class="lang-switch">
+      <button class="lang-btn" data-lang="ru">RU</button>
+      <button class="lang-btn" data-lang="en">EN</button>
+      <button class="lang-btn" data-lang="by">BY</button>
+      <button class="lang-btn" data-lang="be">BE</button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="shell">
+    <a href="./index.html" class="back-link" data-i18n="privacy.back">
+      <span class="icon">←</span>
+      <span>Вернуться на главную</span>
+    </a>
+
+    <article class="doc-card">
+      <h1 data-i18n="privacy.title">
+        Политика конфиденциальности программного средства «Trackly»
+      </h1>
+      <p class="doc-meta" data-i18n="privacy.meta">
+        Настоящая Политика определяет порядок обработки и защиты персональных данных пользователей
+        программного средства персонального мониторинга состояния и медикаментозного лечения пациентов
+        с эпилепсией «Trackly».
+      </p>
+
+      <h2 data-i18n="privacy.1.title">1. Общие положения</h2>
+      <p data-i18n="privacy.1.p1">
+        Настоящая Политика конфиденциальности (далее — Политика) определяет порядок обработки и защиты
+        персональных данных пользователей программного средства «Trackly» (далее — Программное средство, Trackly).
+      </p>
+      <p data-i18n="privacy.1.p2">
+        Владельцем и оператором Программного средства является физическое лицо Кунин Ярослав Вадимович,
+        24.04.2009 г.р. (далее — Оператор).
+      </p>
+      <p data-i18n="privacy.1.p3">
+        Устанавливая Trackly, проходя регистрацию и/или продолжая использование Программного средства,
+        Пользователь подтверждает, что ознакомился с настоящей Политикой и выражает согласие с её условиями.
+        В случае несогласия с Политикой Пользователь обязан прекратить использование Программного средства.
+      </p>
+
+      <h2 data-i18n="privacy.2.title">2. Правовые основания обработки персональных данных</h2>
+      <p data-i18n="privacy.2.p1">
+        Оператор обрабатывает персональные данные Пользователя на основании:
+      </p>
+      <ul>
+        <li data-i18n="privacy.2.li1">
+          добровольного согласия Пользователя, выраженного при регистрации
+          (установка «галочки» и нажатие кнопки регистрации/продолжения);
+        </li>
+        <li data-i18n="privacy.2.li2">
+          необходимости исполнения функций Trackly по инициативе Пользователя
+          (ведение журнала состояния, формирование отчётов, отправка оповещений);
+        </li>
+        <li data-i18n="privacy.2.li3">
+          иных оснований, предусмотренных применимым законодательством.
+        </li>
+      </ul>
+
+      <h2 data-i18n="privacy.3.title">3. Состав обрабатываемых персональных данных</h2>
+      <p data-i18n="privacy.3.p1">
+        При регистрации и использовании Trackly Оператор может обрабатывать следующие категории
+        персональных данных:
+      </p>
+      <ul>
+        <li data-i18n="privacy.3.li1">фамилия, имя, отчество;</li>
+        <li data-i18n="privacy.3.li2">адрес электронной почты;</li>
+        <li data-i18n="privacy.3.li3">номер телефона (при его указании);</li>
+        <li data-i18n="privacy.3.li4">
+          данные об эпилептических приступах (дата и время, тип приступа, длительность,
+          возможные триггеры, комментарии и иные сведения, которые Пользователь добровольно вносит);
+        </li>
+        <li data-i18n="privacy.3.li5">
+          данные о медикаментозной терапии (наименование препарата, дозировка,
+          схема приёма, факты приёма);
+        </li>
+        <li data-i18n="privacy.3.li6">
+          записи о самочувствии, побочных эффектах и иных субъективных состояниях;
+        </li>
+        <li data-i18n="privacy.3.li7">
+          данные об экстренных контактах, указанных Пользователем (Ф.И.О., адреса электронной почты,
+          иные контактные данные);
+        </li>
+        <li data-i18n="privacy.3.li8">
+          технические данные, автоматически передаваемые при использовании Trackly:
+          тип и версия операционной системы, версия приложения, время доступа, идентификаторы сессии и иная
+          подобная информация, необходимая для корректной работы Программного средства.
+        </li>
+      </ul>
+      <p data-i18n="privacy.3.p2">
+        При внесении данных третьих лиц (например, экстренных контактов) Пользователь подтверждает,
+        что получил согласие этих лиц на передачу их данных Оператору и получение ими экстренных оповещений.
+      </p>
+
+      <h2 data-i18n="privacy.4.title">4. Цели обработки персональных данных</h2>
+      <p data-i18n="privacy.4.p1">
+        Персональные данные Пользователей обрабатываются в следующих целях:
+      </p>
+      <ul>
+        <li data-i18n="privacy.4.li1">
+          регистрация Пользователя и предоставление доступа к функционалу Trackly;
+        </li>
+        <li data-i18n="privacy.4.li2">
+          ведение персонального журнала эпилептических приступов и иных пароксизмальных состояний,
+          медикаментозной терапии и самочувствия;
+        </li>
+        <li data-i18n="privacy.4.li3">
+          анализ динамики состояния здоровья Пользователя в пределах функционала Trackly;
+        </li>
+        <li data-i18n="privacy.4.li4">
+          формирование отчётов для последующей передачи лечащему врачу или иного использования
+          по усмотрению Пользователя;
+        </li>
+        <li data-i18n="privacy.4.li5">
+          отправка экстренных оповещений на адреса электронной почты экстренных контактов,
+          указанных Пользователем;
+        </li>
+        <li data-i18n="privacy.4.li6">
+          обеспечение технической работоспособности, безопасности и улучшение качества работы Trackly;
+        </li>
+        <li data-i18n="privacy.4.li7">
+          взаимодействие с Пользователем по вопросам работы Trackly
+          (ответы на обращения, уведомления о важных изменениях).
+        </li>
+      </ul>
+      <p data-i18n="privacy.4.p2">
+        Trackly не является медицинским изделием, медицинской услугой или средством диагностики.
+        Все медицинские решения Пользователь принимает самостоятельно совместно
+        с квалифицированным медицинским специалистом.
+      </p>
+
+      <h2 data-i18n="privacy.5.title">5. Инфраструктура и место обработки данных</h2>
+      <p data-i18n="privacy.5.p1">
+        Программное средство использует внешнюю облачную инфраструктуру. Основные компоненты приведены
+        в таблице:
+      </p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+          <tr>
+            <th data-i18n="privacy.5.th1">Компонент</th>
+            <th data-i18n="privacy.5.th2">Поставщик</th>
+            <th data-i18n="privacy.5.th3">Назначение</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td data-i18n="privacy.5.row1.col1">База данных</td>
+            <td data-i18n="privacy.5.row1.col2">
+              Supabase PostgreSQL (AWS eu-west-1), Ирландия
+            </td>
+            <td data-i18n="privacy.5.row1.col3">
+              Хранение персональных данных Пользователей
+            </td>
+          </tr>
+          <tr>
+            <td data-i18n="privacy.5.row2.col1">Почтовая рассылка</td>
+            <td data-i18n="privacy.5.row2.col2">
+              Resend (AWS eu-west-1), Ирландия
+            </td>
+            <td data-i18n="privacy.5.row2.col3">
+              Доставка транзакционных и экстренных email-сообщений
+            </td>
+          </tr>
+          <tr>
+            <td data-i18n="privacy.5.row3.col1">Домен</td>
+            <td data-i18n="privacy.5.row3.col2">
+              hoster.by, Республика Беларусь
+            </td>
+            <td data-i18n="privacy.5.row3.col3">
+              Регистрация и обслуживание домена tracklyapp.xyz
+            </td>
+          </tr>
+          <tr>
+            <td data-i18n="privacy.5.row4.col1">DNS и верификация домена</td>
+            <td data-i18n="privacy.5.row4.col2">
+              Cloudflare DNS
+            </td>
+            <td data-i18n="privacy.5.row4.col3">
+              Использование открытых DNS-записей для верификации и связи доменного имени
+              с почтовой инфраструктурой Resend
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <p data-i18n="privacy.5.p2">
+        База данных Supabase PostgreSQL размещена за пределами территории Республики Беларусь
+        в дата‑центрах, выбранных поставщиком Supabase. Физическое местоположение серверов
+        определяется конфигурацией проекта Supabase.
+      </p>
+      <p data-i18n="privacy.5.p3">
+        Почтовая инфраструктура Resend физически расположена за пределами Республики Беларусь.
+        Домен tracklyapp.xyz зарегистрирован у белорусского регистратора hoster.by и управляется им
+        на уровне DNS-записей, обслуживаемых Cloudflare.
+      </p>
+
+      <h2 data-i18n="privacy.6.title">6. Порядок обработки и защиты персональных данных</h2>
+      <p data-i18n="privacy.6.p1">
+        Обработка персональных данных осуществляется с использованием средств автоматизации
+        и без их использования, с применением разумных технических и организационных мер защиты,
+        соответствующих характеру обрабатываемых данных.
+      </p>
+      <p data-i18n="privacy.6.p2">
+        Оператор осуществляет следующие действия с персональными данными:
+        сбор, запись, систематизацию, накопление, хранение, уточнение (обновление, изменение),
+        извлечение, использование, обезличивание, блокирование, удаление и уничтожение.
+      </p>
+      <p data-i18n="privacy.6.p3">
+        Доступ к персональным данным предоставляется самому Пользователю
+        (через его учётную запись в Trackly) и Оператору в объёме, необходимом
+        для разработки, сопровождения и технической поддержки Программного средства.
+      </p>
+
+      <h2 data-i18n="privacy.7.title">7. Передача данных третьим лицам</h2>
+      <p data-i18n="privacy.7.p1">
+        Персональные данные Пользователя могут быть переданы третьим лицам в следующих случаях:
+      </p>
+      <ul>
+        <li data-i18n="privacy.7.li1">
+          по прямому указанию или с явного согласия Пользователя (например, при экспорте отчёта для врача);
+        </li>
+        <li data-i18n="privacy.7.li2">
+          при отправке экстренных оповещений на адреса электронной почты экстренных контактов,
+          указанных Пользователем;
+        </li>
+        <li data-i18n="privacy.7.li3">
+          при использовании облачных сервисов, необходимых для работы Trackly
+          (Supabase, Resend и др.), в рамках соглашений с соответствующими поставщиками;
+        </li>
+        <li data-i18n="privacy.7.li4">
+          в случаях, прямо предусмотренных применимым законодательством.
+        </li>
+      </ul>
+      <p data-i18n="privacy.7.p2">
+        Экстренные оповещения формируются на основании данных, введённых Пользователем в Trackly,
+        и отправляются с адреса электронной почты alerts@mail.tracklyapp.xyz на адреса экстренных контактов.
+      </p>
+      <p data-i18n="privacy.7.p3">
+        Оператор не продаёт и не передаёт персональные данные Пользователей третьим лицам
+        в коммерческих целях.
+      </p>
+
+      <h2 data-i18n="privacy.8.title">8. Сроки хранения персональных данных</h2>
+      <p data-i18n="privacy.8.p1">
+        Персональные данные Пользователя хранятся в течение всего периода использования им Trackly
+        и в разумный срок после прекращения использования, если дальнейшее хранение необходимо для:
+      </p>
+      <ul>
+        <li data-i18n="privacy.8.li1">
+          выполнения обязательств Оператора перед Пользователем;
+        </li>
+        <li data-i18n="privacy.8.li2">
+          соблюдения требований применимого законодательства;
+        </li>
+        <li data-i18n="privacy.8.li3">
+          защиты прав и законных интересов Оператора.
+        </li>
+      </ul>
+      <p data-i18n="privacy.8.p2">
+        После достижения целей обработки либо при отзыве согласия персональные данные подлежат
+        удалению или обезличиванию в разумный срок.
+      </p>
+
+      <h2 data-i18n="privacy.9.title">9. Права Пользователя</h2>
+      <p data-i18n="privacy.9.p1">
+        Пользователь имеет право:
+      </p>
+      <ul>
+        <li data-i18n="privacy.9.li1">
+          получать информацию о своих персональных данных и порядке их обработки;
+        </li>
+        <li data-i18n="privacy.9.li2">
+          требовать уточнения, обновления или исправления своих персональных данных;
+        </li>
+        <li data-i18n="privacy.9.li3">
+          требовать удаления своих персональных данных при отсутствии законных оснований
+          для их дальнейшей обработки;
+        </li>
+        <li data-i18n="privacy.9.li4">
+          отзывать ранее данное согласие на обработку персональных данных;
+        </li>
+        <li data-i18n="privacy.9.li5">
+          направлять обращения и возражения по вопросам обработки персональных данных.
+        </li>
+      </ul>
+      <p data-i18n="privacy.9.p2">
+        Для реализации указанных прав Пользователь может обратиться к Оператору
+        по адресу электронной почты: <a href="mailto:jaraslaukunin@gmail.com">jaraslaukunin@gmail.com</a>.
+        В теме письма рекомендуется указывать «Персональные данные Trackly».
+      </p>
+
+      <h2 data-i18n="privacy.10.title">10. Отзыв согласия на обработку персональных данных</h2>
+      <p data-i18n="privacy.10.p1">
+        Пользователь вправе в любой момент отозвать своё согласие на обработку персональных данных,
+        направив обращение с пометкой «Отзыв согласия на обработку персональных данных»
+        на адрес электронной почты:
+        <a href="mailto:jaraslaukunin@gmail.com">jaraslaukunin@gmail.com</a>.
+      </p>
+      <p data-i18n="privacy.10.p2">
+        После получения отзыва согласия Оператор прекращает обработку персональных данных Пользователя,
+        за исключением случаев, когда сохранение данных необходимо в соответствии с законодательством
+        или для защиты прав и законных интересов Оператора. Данные подлежат удалению или обезличиванию
+        в разумный срок.
+      </p>
+
+      <h2 data-i18n="privacy.11.title">11. Изменения Политики конфиденциальности</h2>
+      <p data-i18n="privacy.11.p1">
+        Оператор вправе вносить изменения в настоящую Политику. Актуальная версия Политики доступна
+        вместе с документацией на Trackly либо иным образом доводится до сведения Пользователя.
+      </p>
+      <p data-i18n="privacy.11.p2">
+        Новая редакция Политики вступает в силу с момента её размещения, если иное не предусмотрено
+        самой новой редакцией. Продолжая использование Trackly после вступления изменений в силу,
+        Пользователь подтверждает своё согласие с обновлённой Политикой.
+      </p>
+
+      <h2 data-i18n="privacy.12.title">12. Контактная информация Оператора</h2>
+      <p data-i18n="privacy.12.p1">
+        Оператор: Кунин Ярослав Вадимович.
+      </p>
+      <p data-i18n="privacy.12.p2">
+        Связь и вопросы по персональным данным: <a href="mailto:jaraslaukunin@gmail.com">jaraslaukunin@gmail.com</a>,
+        tracklyapp.xyz.
+      </p>
+    </article>
+  </div>
+</main>
+
+<script>
+  const privacyDict = {
+    ru: {
+      'privacy.pageTitle': 'Политика конфиденциальности — Trackly',
+      'privacy.back': '← Вернуться на главную',
+      'privacy.title': 'Политика конфиденциальности программного средства «Trackly»',
+      'privacy.meta': 'Настоящая Политика определяет порядок обработки и защиты персональных данных пользователей программного средства персонального мониторинга состояния и медикаментозного лечения пациентов с эпилепсией «Trackly».',
+      'privacy.1.title': '1. Общие положения',
+      'privacy.1.p1': 'Настоящая Политика конфиденциальности (далее — Политика) определяет порядок обработки и защиты персональных данных пользователей программного средства «Trackly» (далее — Программное средство, Trackly).',
+      'privacy.1.p2': 'Владельцем и оператором Программного средства является физическое лицо Кунин Ярослав Вадимович, 24.04.2009 г.р. (далее — Оператор).',
+      'privacy.1.p3': 'Устанавливая Trackly, проходя регистрацию и/или продолжая использование Программного средства, Пользователь подтверждает, что ознакомился с настоящей Политикой и выражает согласие с её условиями. В случае несогласия с Политикой Пользователь обязан прекратить использование Программного средства.',
+      'privacy.2.title': '2. Правовые основания обработки персональных данных',
+      'privacy.2.p1': 'Оператор обрабатывает персональные данные Пользователя на основании:',
+      'privacy.2.li1': 'добровольного согласия Пользователя, выраженного при регистрации (установка «галочки» и нажатие кнопки регистрации/продолжения);',
+      'privacy.2.li2': 'необходимости исполнения функций Trackly по инициативе Пользователя (ведение журнала состояния, формирование отчётов, отправка оповещений);',
+      'privacy.2.li3': 'иных оснований, предусмотренных применимым законодательством.',
+      'privacy.3.title': '3. Состав обрабатываемых персональных данных',
+      'privacy.3.p1': 'При регистрации и использовании Trackly Оператор может обрабатывать следующие категории персональных данных:',
+      'privacy.3.li1': 'фамилия, имя, отчество;',
+      'privacy.3.li2': 'адрес электронной почты;',
+      'privacy.3.li3': 'номер телефона (при его указании);',
+      'privacy.3.li4': 'данные об эпилептических приступах (дата и время, тип приступа, длительность, возможные триггеры, комментарии и иные сведения, которые Пользователь добровольно вносит);',
+      'privacy.3.li5': 'данные о медикаментозной терапии (наименование препарата, дозировка, схема приёма, факты приёма);',
+      'privacy.3.li6': 'записи о самочувствии, побочных эффектах и иных субъективных состояниях;',
+      'privacy.3.li7': 'данные об экстренных контактах, указанных Пользователем (Ф.И.О., адреса электронной почты, иные контактные данные);',
+      'privacy.3.li8': 'технические данные, автоматически передаваемые при использовании Trackly: тип и версия операционной системы, версия приложения, время доступа, идентификаторы сессии и иная подобная информация, необходимая для корректной работы Программного средства.',
+      'privacy.3.p2': 'При внесении данных третьих лиц (например, экстренных контактов) Пользователь подтверждает, что получил согласие этих лиц на передачу их данных Оператору и получение ими экстренных оповещений.',
+      'privacy.4.title': '4. Цели обработки персональных данных',
+      'privacy.4.p1': 'Персональные данные Пользователей обрабатываются в следующих целях:',
+      'privacy.4.li1': 'регистрация Пользователя и предоставление доступа к функционалу Trackly;',
+      'privacy.4.li2': 'ведение персонального журнала эпилептических приступов и иных пароксизмальных состояний, медикаментозной терапии и самочувствия;',
+      'privacy.4.li3': 'анализ динамики состояния здоровья Пользователя в пределах функционала Trackly;',
+      'privacy.4.li4': 'формирование отчётов для последующей передачи лечащему врачу или иного использования по усмотрению Пользователя;',
+      'privacy.4.li5': 'отправка экстренных оповещений на адреса электронной почты экстренных контактов, указанных Пользователем;',
+      'privacy.4.li6': 'обеспечение технической работоспособности, безопасности и улучшение качества работы Trackly;',
+      'privacy.4.li7': 'взаимодействие с Пользователем по вопросам работы Trackly (ответы на обращения, уведомления о важных изменениях).',
+      'privacy.4.p2': 'Trackly не является медицинским изделием, медицинской услугой или средством диагностики. Все медицинские решения Пользователь принимает самостоятельно совместно с квалифицированным медицинским специалистом.',
+      'privacy.5.title': '5. Инфраструктура и место обработки данных',
+      'privacy.5.p1': 'Программное средство использует внешнюю облачную инфраструктуру. Основные компоненты приведены в таблице:',
+      'privacy.5.th1': 'Компонент',
+      'privacy.5.th2': 'Поставщик',
+      'privacy.5.th3': 'Назначение',
+      'privacy.5.row1.col1': 'База данных',
+      'privacy.5.row1.col2': 'Supabase PostgreSQL (AWS eu-west-1), Ирландия',
+      'privacy.5.row1.col3': 'Хранение персональных данных Пользователей',
+      'privacy.5.row2.col1': 'Почтовая рассылка',
+      'privacy.5.row2.col2': 'Resend (AWS eu-west-1), Ирландия',
+      'privacy.5.row2.col3': 'Доставка транзакционных и экстренных email-сообщений',
+      'privacy.5.row3.col1': 'Домен',
+      'privacy.5.row3.col2': 'hoster.by, Республика Беларусь',
+      'privacy.5.row3.col3': 'Регистрация и обслуживание домена tracklyapp.xyz',
+      'privacy.5.row4.col1': 'DNS и верификация домена',
+      'privacy.5.row4.col2': 'Cloudflare DNS',
+      'privacy.5.row4.col3': 'Использование открытых DNS-записей для верификации и связи доменного имени с почтовой инфраструктурой Resend',
+      'privacy.5.p2': 'База данных Supabase PostgreSQL размещена за пределами территории Республики Беларусь в дата‑центрах, выбранных поставщиком Supabase. Физическое местоположение серверов определяется конфигурацией проекта Supabase.',
+      'privacy.5.p3': 'Почтовая инфраструктура Resend физически расположена за пределами Республики Беларусь. Домен tracklyapp.xyz зарегистрирован у белорусского регистратора hoster.by и управляется им на уровне DNS-записей, обслуживаемых Cloudflare.',
+      'privacy.6.title': '6. Порядок обработки и защиты персональных данных',
+      'privacy.6.p1': 'Обработка персональных данных осуществляется с использованием средств автоматизации и без их использования, с применением разумных технических и организационных мер защиты, соответствующих характеру обрабатываемых данных.',
+      'privacy.6.p2': 'Оператор осуществляет следующие действия с персональными данными: сбор, запись, систематизацию, накопление, хранение, уточнение (обновление, изменение), извлечение, использование, обезличивание, блокирование, удаление и уничтожение.',
+      'privacy.6.p3': 'Доступ к персональным данным предоставляется самому Пользователю (через его учётную запись в Trackly) и Оператору в объёме, необходимом для разработки, сопровождения и технической поддержки Программного средства.',
+      'privacy.7.title': '7. Передача данных третьим лицам',
+      'privacy.7.p1': 'Персональные данные Пользователя могут быть переданы третьим лицам в следующих случаях:',
+      'privacy.7.li1': 'по прямому указанию или с явного согласия Пользователя (например, при экспорте отчёта для врача);',
+      'privacy.7.li2': 'при отправке экстренных оповещений на адреса электронной почты экстренных контактов, указанных Пользователем;',
+      'privacy.7.li3': 'при использовании облачных сервисов, необходимых для работы Trackly (Supabase, Resend и др.), в рамках соглашений с соответствующими поставщиками;',
+      'privacy.7.li4': 'в случаях, прямо предусмотренных применимым законодательством.',
+      'privacy.7.p2': 'Экстренные оповещений формируются на основании данных, введённых Пользователем в Trackly, и отправляются с адреса электронной почты alerts@mail.tracklyapp.xyz на адреса экстренных контактов.',
+      'privacy.7.p3': 'Оператор не продаёт и не передаёт персональные данные Пользователей третьим лицам в коммерческих целях.',
+      'privacy.8.title': '8. Сроки хранения персональных данных',
+      'privacy.8.p1': 'Персональные данные Пользователя хранятся в течение всего периода использования им Trackly и в разумный срок после прекращения использования, если дальнейшее хранение необходимо для:',
+      'privacy.8.li1': 'выполнения обязательств Оператора перед Пользователем;',
+      'privacy.8.li2': 'соблюдения требований применимого законодательства;',
+      'privacy.8.li3': 'защиты прав и законных интересов Оператора.',
+      'privacy.8.p2': 'После достижения целей обработки либо при отзыве согласия персональные данные подлежат удалению или обезличиванию в разумный срок.',
+      'privacy.9.title': '9. Права Пользователя',
+      'privacy.9.p1': 'Пользователь имеет право:',
+      'privacy.9.li1': 'получать информацию о своих персональных данных и порядке их обработки;',
+      'privacy.9.li2': 'требовать уточнения, обновления или исправления своих персональных данных;',
+      'privacy.9.li3': 'требовать удаления своих персональных данных при отсутствии законных оснований для их дальнейшей обработки;',
+      'privacy.9.li4': 'отзывать ранее данное согласие на обработку персональных данных;',
+      'privacy.9.li5': 'направлять обращения и возражения по вопросам обработки персональных данных.',
+      'privacy.9.p2': 'Для реализации указанных прав Пользователь может обратиться к Оператору по адресу электронной почты: jaraslaukunin@gmail.com. В теме письма рекомендуется указывать «Персональные данные Trackly».',
+      'privacy.10.title': '10. Отзыв согласия на обработку персональных данных',
+      'privacy.10.p1': 'Пользователь вправе в любой момент отозвать своё согласие на обработку персональных данных, направив обращение с пометкой «Отзыв согласия на обработку персональных данных» на адрес электронной почты: jaraslaukunin@gmail.com.',
+      'privacy.10.p2': 'После получения отзыва согласия Оператор прекращает обработку персональных данных Пользователя, за исключением случаев, когда сохранение данных необходимо в соответствии с законодательством или для защиты прав и законных интересов Оператора. Данные подлежат удалению или обезличиванию в разумный срок.',
+      'privacy.11.title': '11. Изменения Политики конфиденциальности',
+      'privacy.11.p1': 'Оператор вправе вносить изменения в настоящую Политику. Актуальная версия Политики доступна вместе с документацией на Trackly либо иным образом доводится до сведения Пользователя.',
+      'privacy.11.p2': 'Новая редакция Политики вступает в силу с момента её размещения, если иное не предусмотрено самой новой редакцией. Продолжая использование Trackly после вступления изменений в силу, Пользователь подтверждает своё согласие с обновлённой Политикой.',
+      'privacy.12.title': '12. Контактная информация Оператора',
+      'privacy.12.p1': 'Оператор: Кунин Ярослав Вадимович.',
+      'privacy.12.p2': 'Связь и вопросы по персональным данным: jaraslaukunin@gmail.com, tracklyapp.xyz.'
+    },
+    en: {
+      'privacy.pageTitle': 'Privacy Policy — Trackly',
+      'privacy.back': '← Back to main page',
+      'privacy.title': 'Privacy Policy for the Trackly software',
+      'privacy.meta': 'This Policy describes how personal data of users of the personal monitoring software for epilepsy patients “Trackly” is processed and protected.',
+      'privacy.1.title': '1. General provisions',
+      'privacy.1.p1': 'This Privacy Policy (the Policy) sets out the procedure for processing and protecting personal data of users of the Trackly software (the Software, Trackly).',
+      'privacy.1.p2': 'The owner and operator of the Software is an individual, Jaraslau Kunin, born 24.04.2009 (the Operator).',
+      'privacy.1.p3': 'By installing Trackly, registering and/or continuing to use the Software, the User confirms that they have read this Policy and agree to its terms. If the User does not agree with the Policy, they must stop using the Software.',
+      'privacy.2.title': '2. Legal grounds for processing personal data',
+      'privacy.2.p1': 'The Operator processes the User’s personal data on the basis of:',
+      'privacy.2.li1': 'the User’s voluntary consent given during registration (checkbox and registration/continue button);',
+      'privacy.2.li2': 'the need to perform Trackly functionality at the User’s request (journal, reports, notifications);',
+      'privacy.2.li3': 'other grounds provided by applicable law.',
+      'privacy.3.title': '3. Personal data processed',
+      'privacy.3.p1': 'When registering and using Trackly, the Operator may process the following categories of personal data:',
+      'privacy.3.li1': 'surname, first name, patronymic;',
+      'privacy.3.li2': 'email address;',
+      'privacy.3.li3': 'phone number (if provided);',
+      'privacy.3.li4': 'data about epileptic seizures (date and time, type, duration, possible triggers, comments and other information the User enters);',
+      'privacy.3.li5': 'data on medication therapy (drug name, dosage, regimen, actual intake);',
+      'privacy.3.li6': 'entries on wellbeing, side effects, and other subjective states;',
+      'privacy.3.li7': 'data on emergency contacts provided by the User (name, email addresses, other contact details);',
+      'privacy.3.li8': 'technical data automatically transmitted when using Trackly: OS type and version, app version, access time, session identifiers and similar data needed for correct operation.',
+      'privacy.3.p2': 'When entering third-party data (for example, emergency contacts), the User confirms that they have obtained consent from these persons to transfer their data to the Operator and to receive emergency notifications.',
+      'privacy.4.title': '4. Purposes of processing personal data',
+      'privacy.4.p1': 'Personal data is processed for the following purposes:',
+      'privacy.4.li1': 'User registration and providing access to Trackly functionality;',
+      'privacy.4.li2': 'maintaining a personal journal of epileptic seizures and other events, medication therapy and wellbeing;',
+      'privacy.4.li3': 'analysing health dynamics within the Trackly functionality;',
+      'privacy.4.li4': 'generating reports for subsequent transfer to the User’s doctor or for other use chosen by the User;',
+      'privacy.4.li5': 'sending emergency notifications to the email addresses of emergency contacts specified by the User;',
+      'privacy.4.li6': 'ensuring technical operability, security, and improving Trackly;',
+      'privacy.4.li7': 'communicating with the User regarding Trackly (support requests, important updates).',
+      'privacy.4.p2': 'Trackly is not a medical device, medical service, or diagnostic tool. All medical decisions are made by the User together with a qualified healthcare professional.',
+      'privacy.5.title': '5. Infrastructure and data location',
+      'privacy.5.p1': 'Trackly uses external cloud infrastructure. The main components are:',
+      'privacy.5.th1': 'Component',
+      'privacy.5.th2': 'Provider',
+      'privacy.5.th3': 'Purpose',
+      'privacy.5.row1.col1': 'Database',
+      'privacy.5.row1.col2': 'Supabase PostgreSQL (AWS eu-west-1), Ireland',
+      'privacy.5.row1.col3': 'Storage of Users’ personal data',
+      'privacy.5.row2.col1': 'Email delivery',
+      'privacy.5.row2.col2': 'Resend (AWS eu-west-1), Ireland',
+      'privacy.5.row2.col3': 'Transactional and emergency email delivery',
+      'privacy.5.row3.col1': 'Domain',
+      'privacy.5.row3.col2': 'hoster.by, Republic of Belarus',
+      'privacy.5.row3.col3': 'Registration and management of tracklyapp.xyz',
+      'privacy.5.row4.col1': 'DNS and domain verification',
+      'privacy.5.row4.col2': 'Cloudflare DNS',
+      'privacy.5.row4.col3': 'Public DNS records used to verify and link the domain with Resend email infrastructure',
+      'privacy.5.p2': 'The Supabase PostgreSQL database is hosted outside the Republic of Belarus in data centers selected by Supabase. The exact server location depends on the Supabase project settings.',
+      'privacy.5.p3': 'The Resend email infrastructure is located outside the Republic of Belarus. The tracklyapp.xyz domain is registered with the Belarusian registrar hoster.by and managed at the DNS level by Cloudflare.',
+      'privacy.6.title': '6. Processing and protection of personal data',
+      'privacy.6.p1': 'Personal data are processed with and without automation tools using reasonable technical and organisational measures appropriate to the nature of the data.',
+      'privacy.6.p2': 'The Operator carries out collection, recording, systematisation, accumulation, storage, updating, modification, retrieval, use, anonymisation, blocking, deletion and destruction of personal data.',
+      'privacy.6.p3': 'Access to personal data is provided to the User (via their Trackly account) and to the Operator to the extent necessary for development, maintenance and technical support.',
+      'privacy.7.title': '7. Transfer of data to third parties',
+      'privacy.7.p1': 'Personal data may be transferred to third parties in the following cases:',
+      'privacy.7.li1': 'by explicit instruction or with explicit consent of the User (for example, when exporting a report for a doctor);',
+      'privacy.7.li2': 'when sending emergency notifications to emergency contacts specified by the User;',
+      'privacy.7.li3': 'when using cloud services necessary for Trackly (Supabase, Resend, etc.) under agreements with providers;',
+      'privacy.7.li4': 'when required by applicable law.',
+      'privacy.7.p2': 'Emergency notifications are generated from data entered by the User in Trackly and are sent from alerts@mail.tracklyapp.xyz to emergency contact addresses.',
+      'privacy.7.p3': 'The Operator does not sell or transfer Users’ personal data to third parties for commercial purposes.',
+      'privacy.8.title': '8. Data retention periods',
+      'privacy.8.p1': 'Personal data are stored for as long as the User uses Trackly and for a reasonable period afterwards where storage is necessary for:',
+      'privacy.8.li1': 'performance of the Operator’s obligations to the User;',
+      'privacy.8.li2': 'compliance with applicable law;',
+      'privacy.8.li3': 'protection of the Operator’s rights and legitimate interests.',
+      'privacy.8.p2': 'After the purposes are achieved or consent is withdrawn, personal data are deleted or anonymised within a reasonable period.',
+      'privacy.9.title': '9. User rights',
+      'privacy.9.p1': 'The User has the right to:',
+      'privacy.9.li1': 'receive information about their personal data and how they are processed;',
+      'privacy.9.li2': 'request updating or correction of their personal data;',
+      'privacy.9.li3': 'request deletion of their personal data where there are no legal grounds to continue processing;',
+      'privacy.9.li4': 'withdraw previously given consent to personal data processing;',
+      'privacy.9.li5': 'submit requests and objections regarding personal data processing.',
+      'privacy.9.p2': 'To exercise these rights, the User can contact the Operator at: jaraslaukunin@gmail.com. Please use “Trackly personal data” in the subject.',
+      'privacy.10.title': '10. Withdrawal of consent',
+      'privacy.10.p1': 'The User may withdraw their consent to personal data processing at any time by sending an email marked “Withdrawal of consent to personal data processing” to: jaraslaukunin@gmail.com.',
+      'privacy.10.p2': 'After receiving the withdrawal, the Operator stops processing the User’s personal data except where retention is required by law or necessary to protect the Operator’s rights and interests. The data are deleted or anonymised within a reasonable period.',
+      'privacy.11.title': '11. Changes to the Privacy Policy',
+      'privacy.11.p1': 'The Operator may amend this Policy. The current version is available with the Trackly documentation or otherwise communicated to the User.',
+      'privacy.11.p2': 'A new version of the Policy takes effect when published unless otherwise stated. Continued use of Trackly after changes take effect means the User agrees with the updated Policy.',
+      'privacy.12.title': '12. Operator contact details',
+      'privacy.12.p1': 'Operator: Jaraslau Kunin.',
+      'privacy.12.p2': 'Contact and personal data questions: jaraslaukunin@gmail.com, tracklyapp.xyz.'
+    },
+    by: {
+      'privacy.pageTitle': 'Палітыка канфідэнцыяльнасці — Trackly',
+      'privacy.back': '← Вярнуцца на галоўную',
+      'privacy.title': 'Палітыка канфідэнцыяльнасці праграмнага сродку «Trackly»',
+      'privacy.meta': 'Гэтая Палітыка вызначае парадак апрацоўкі і абароны персанальных даных карыстальнікаў праграмнага сродку для персанальнага маніторынгу стану і медыкаментознага лячэння пацыентаў з эпілепсіяй «Trackly».',
+      'privacy.1.title': '1. Агульныя палажэнні',
+      'privacy.1.p1': 'Гэтая Палітыка канфідэнцыяльнасці (далей — Палітыка) вызначае парадак апрацоўкі і абароны персанальных даных карыстальнікаў праграмнага сродку «Trackly» (далей — Праграмны сродак, Trackly).',
+      'privacy.1.p2': 'Уладальнік і аператар Праграмнага сродку — фізічная асоба Кунін Яраслаў Вадзімавіч, 24.04.2009 г.н. (далей — Аператар).',
+      'privacy.1.p3': 'Усталёўваючы Trackly, праходзячы рэгістрацыю і/або працягваючы выкарыстанне Праграмнага сродку, Карыстальнік пацвярджае, што азнаёміўся з гэтай Палітыкай і згодны з яе ўмовамі. Пры нязгодзе з Палітыкай Карыстальнік абавязаны спыніць выкарыстанне Праграмнага сродку.',
+      'privacy.2.title': '2. Прававыя падставы апрацоўкі персанальных даных',
+      'privacy.2.p1': 'Аператар апрацоўвае персанальныя даныя Карыстальніка на падставе:',
+      'privacy.2.li1': 'добраахвотнай згоды Карыстальніка, якая выражаецца пры рэгістрацыі (устаноўка сцяжка і націсканне кнопкі рэгістрацыі/працягнення);',
+      'privacy.2.li2': 'неабходнасці выканання функцый Trackly па ініцыятыве Карыстальніка (вядзенне дзённіка стану, фарміраванне справаздач, адпраўка апавяшчэнняў);',
+      'privacy.2.li3': 'іншых падстаў, прадугледжаных прымяняльным заканадаўствам.',
+      'privacy.3.title': '3. Склад апрацоўваемых персанальных даных',
+      'privacy.3.p1': 'Пры рэгістрацыі і выкарыстанні Trackly Аператар можа апрацоўваць наступныя катэгорыі персанальных даных:',
+      'privacy.3.li1': 'прозвішча, імя, імя па бацьку;',
+      'privacy.3.li2': 'адрас электроннай пошты;',
+      'privacy.3.li3': 'нумар тэлефона (пры яго ўказанні);',
+      'privacy.3.li4': 'даныя пра эпілептычныя прыпадкі (дата і час, тып прыпадку, працягласць, магчымыя трыгеры, каментары і іншыя звесткі, якія Карыстальнік добраахвотна ўносіць);',
+      'privacy.3.li5': 'даныя пра медыкаментозную тэрапію (назва прэпарата, дазіроўка, схема прыёму, факты прыёму);',
+      'privacy.3.li6': 'запісы пра самаадчуванне, пабочныя эфекты і іншыя суб’ектыўныя станы;',
+      'privacy.3.li7': 'даныя пра аварыйныя кантакты, указаныя Карыстальнікам (П.І.І., адрасы электроннай пошты, іншыя кантактныя звесткі);',
+      'privacy.3.li8': 'тэхнічныя даныя, якія аўтаматычна перадаюцца пры выкарыстанні Trackly: тып і версія аперацыйнай сістэмы, версія прыкладання, час доступу, ідэнтыфікатары сесіі і іншая падобная інфармацыя, неабходная для карэктнай працы Праграмнага сродку.',
+      'privacy.3.p2': 'Уводзячы даныя трэціх асоб (напрыклад, аварыйных кантактаў), Карыстальнік пацвярджае, што атрымаў іх згоду на перадачу іх даных Аператару і на атрымання імі аварыйных апавяшчэнняў.',
+      'privacy.4.title': '4. Мэты апрацоўкі персанальных даных',
+      'privacy.4.p1': 'Персанальныя даныя Карыстальнікаў апрацоўваюцца ў наступных мэтах:',
+      'privacy.4.li1': 'рэгістрацыя Карыстальніка і прадастаўленне доступу да функцыяналу Trackly;',
+      'privacy.4.li2': 'вядзенне персанальнага дзённіка эпілептычных прыпадкаў і іншых пароксізмальных станаў, медыкаментознай тэрапіі і самаадчування;',
+      'privacy.4.li3': 'аналіз дынамікі стану здароўя Карыстальніка ў межах функцыяналу Trackly;',
+      'privacy.4.li4': 'фарміраванне справаздач для наступнай перадачы лечачаму ўрачу або іншага выкарыстання па меркаванні Карыстальніка;',
+      'privacy.4.li5': 'адпраўка аварыйных апавяшчэнняў на адрасы электроннай пошты аварыйных кантактаў, указанных Карыстальнікам;',
+      'privacy.4.li6': 'забеспячэнне тэхнічнай працаздольнасці, бяспекі і паляпшэнне якасці працы Trackly;',
+      'privacy.4.li7': 'ўзаемадзеянне з Карыстальнікам па пытаннях працы Trackly (адказы на звароты, апавяшчэнні пра важныя змены).',
+      'privacy.4.p2': 'Trackly не з’яўляецца медыцынскім вырабам, медыцынскай паслугай або сродкам дыягностыкі. Усе медыцынскія рашэнні Карыстальнік прымае самастойна разам з кваліфікаваным медыцынскім спецыялістам.',
+      'privacy.5.title': '5. Інфраструктура і месца апрацоўкі даных',
+      'privacy.5.p1': 'Праграмны сродак выкарыстоўвае вонкавую воблачную інфраструктуру. Асноўныя кампаненты прыведзены ў табліцы:',
+      'privacy.5.th1': 'Кампанент',
+      'privacy.5.th2': 'Пастаўшчык',
+      'privacy.5.th3': 'Прызначэнне',
+      'privacy.5.row1.col1': 'База даных',
+      'privacy.5.row1.col2': 'Supabase PostgreSQL (AWS eu-west-1), Ірландыя',
+      'privacy.5.row1.col3': 'Захоўванне персанальных даных Карыстальнікаў',
+      'privacy.5.row2.col1': 'Паштовая рассылка',
+      'privacy.5.row2.col2': 'Resend (AWS eu-west-1), Ірландыя',
+      'privacy.5.row2.col3': 'Дастаўка транзакцыйных і аварыйных email-паведамленняў',
+      'privacy.5.row3.col1': 'Дамен',
+      'privacy.5.row3.col2': 'hoster.by, Рэспубліка Беларусь',
+      'privacy.5.row3.col3': 'Рэгістрацыя і абслугоўванне дамена tracklyapp.xyz',
+      'privacy.5.row4.col1': 'DNS і верыфікацыя дамена',
+      'privacy.5.row4.col2': 'Cloudflare DNS',
+      'privacy.5.row4.col3': 'Выкарыстанне адкрытых DNS-запісаў для верыфікацыі і сувязі даменнага імя з паштовай інфраструктурай Resend',
+      'privacy.5.p2': 'База даных Supabase PostgreSQL размяшчаецца па-за межамі Рэспублікі Беларусь у дата-цэнтрах, выбраных пастаўшчыком Supabase. Фізічнае месцазнаходжанне сервераў вызначаецца канфігурацыяй праекта Supabase.',
+      'privacy.5.p3': 'Паштовае інфраструктура Resend фізічна знаходзіцца па-за межамі Рэспублікі Беларусь. Дамен tracklyapp.xyz зарэгістраваны ў беларускім рэгістратары hoster.by і кіруецца на ўзроўні DNS-запісаў, якія абслугоўваюцца Cloudflare.',
+      'privacy.6.title': '6. Парадак апрацоўкі і абароны персанальных даных',
+      'privacy.6.p1': 'Апрацоўка персанальных даных ажыццяўляецца з выкарыстаннем сродкаў аўтаматызацыі і без іх, з прымяненнем разумных тэхнічных і арганізацыйных мер абароны, адпаведных характару апрацоўваемых даных.',
+      'privacy.6.p2': 'Аператар ажыццяўляе наступныя дзеянні з персанальнымі данымі: збор, запіс, сістэматызацыю, назапашванне, захоўванне, удакладненне (абнаўленне, змяненне), здабыванне, выкарыстанне, абясабленне, блакаванне, выдаленне і знішчэнне.',
+      'privacy.6.p3': 'Доступ да персанальных даных прадастаўляецца самому Карыстальніку (праз яго ўліковы запіс у Trackly) і Аператару ў аб’ёме, неабходным для распрацоўкі, суправаджэння і тэхнічнай падтрымкі Праграмнага сродку.',
+      'privacy.7.title': '7. Перадача даных трэцім асобам',
+      'privacy.7.p1': 'Персанальныя даныя Карыстальніка могуць перадавацца трэцім асобам у наступных выпадках:',
+      'privacy.7.li1': 'па прамым указанні або з выразнай згоды Карыстальніка (напрыклад, пры экспарце справаздачы для ўрача);',
+      'privacy.7.li2': 'пры адпраўцы аварыйных апавяшчэнняў на адрасы электроннай пошты аварыйных кантактаў, указанных Карыстальнікам;',
+      'privacy.7.li3': 'пры выкарыстанні воблачных сэрвісаў, неабходных для працы Trackly (Supabase, Resend і інш.), у межах дамоў з пастаўшчыкамі;',
+      'privacy.7.li4': 'у выпадках, прама прадугледжаных прымяняльным заканадаўствам.',
+      'privacy.7.p2': 'Аварыйныя апавяшчэнні фарміруюцца на падставе даных, уведзеных Карыстальнікам у Trackly, і адпраўляюцца з адраса alerts@mail.tracklyapp.xyz на адрасы аварыйных кантактаў.',
+      'privacy.7.p3': 'Аператар не прадае і не перадае персанальныя даныя Карыстальнікаў трэцім асобам у камерцыйных мэтах.',
+      'privacy.8.title': '8. Тэрміны захоўвання персанальных даных',
+      'privacy.8.p1': 'Персанальныя даныя Карыстальніка захоўваюцца на працягу ўсяго перыяду выкарыстання ім Trackly і ў разумны тэрмін пасля спынення выкарыстання, калі далейшае захоўванне неабходна для:',
+      'privacy.8.li1': 'выканання абавязацельстваў Аператара перад Карыстальнікам;',
+      'privacy.8.li2': 'выканання патрабаванняў прымяняльнага заканадаўства;',
+      'privacy.8.li3': 'абароны правоў і законных інтарэсаў Аператара.',
+      'privacy.8.p2': 'Пасля дасягнення мэт апрацоўкі або пры адкліканні згоды персанальныя даныя падлягаюць выдаленню або абясабленню ў разумны тэрмін.',
+      'privacy.9.title': '9. Правы Карыстальніка',
+      'privacy.9.p1': 'Карыстальнік мае права:',
+      'privacy.9.li1': 'атрымліваць інфармацыю пра свае персанальныя даныя і парадак іх апрацоўкі;',
+      'privacy.9.li2': 'патрабаваць удакладнення, абнаўлення або выпраўлення сваіх персанальных даных;',
+      'privacy.9.li3': 'патрабаваць выдалення сваіх персанальных даных пры адсутнасці законных падстаў для іх далейшай апрацоўкі;',
+      'privacy.9.li4': 'адклікаць раней дадзеную згоду на апрацоўку персанальных даных;',
+      'privacy.9.li5': 'накіроўваць звароты і пярэчанні па пытаннях апрацоўкі персанальных даных.',
+      'privacy.9.p2': 'Для рэалізацыі названых правоў Карыстальнік можа звярнуцца да Аператара па адрасе электроннай пошты: jaraslaukunin@gmail.com. У тэме ліста рэкамендуецца ўказваць «Персанальныя даныя Trackly».',
+      'privacy.10.title': '10. Адкліканне згоды на апрацоўку персанальных даных',
+      'privacy.10.p1': 'Карыстальнік мае права ў любы момант адклікаць сваю згоду на апрацоўку персанальных даных, накіраваўшы зварот з пазнакай «Адкліканне згоды на апрацоўку персанальных даных» на адрас электроннай пошты: jaraslaukunin@gmail.com.',
+      'privacy.10.p2': 'Пасля атрымання адклікання згоды Аператар спыняе апрацоўку персанальных даных Карыстальніка, за выключэннем выпадкаў, калі захоўванне даных неабходна ў адпаведнасці з заканадаўствам або для абароны правоў і законных інтарэсаў Аператара. Даныя падлягаюць выдаленню або абясабленню ў разумны тэрмін.',
+      'privacy.11.title': '11. Змены Палітыкі канфідэнцыяльнасці',
+      'privacy.11.p1': 'Аператар мае права ўносіць змены ў гэту Палітыку. Актуальная версія Палітыкі даступная разам з дакументацыяй на Trackly або іншым чынам даводзіцца да ведама Карыстальніка.',
+      'privacy.11.p2': 'Новая рэдакцыя Палітыкі ўступае ў сілу з моманту яе размяшчэння, калі іншае не прадугледжана самой новай рэдакцыяй. Працягваючы выкарыстоўваць Trackly пасля ўступлення змен у сілу, Карыстальнік пацвярджае сваю згоду з абноўленай Палітыкай.',
+      'privacy.12.title': '12. Кантактная інфармацыя Аператара',
+      'privacy.12.p1': 'Аператар: Кунін Яраслаў Вадзімавіч.',
+      'privacy.12.p2': 'Сувязь і пытанні па персанальных даных: jaraslaukunin@gmail.com, tracklyapp.xyz.'
+    },
+    be: {
+      'privacy.pageTitle': 'Palityka kanfidecyjnaści — Trackly',
+      'privacy.back': '← Viarniŭsacca na hałoŭnuju',
+      'privacy.title': 'Palityka kanfidecyjnaści prahr. asiarodku «Trackly»',
+      'privacy.meta': 'Hetaja Palityka vyznačaje paradak apračoŭki i abaronу perasanalnych danychaŭ karystalnikaŭ prahr. asiarodku dla asabіstaha manitoryngu stanu i lėčennia epilėpsii «Trackly».',
+      'privacy.1.title': '1. Ahulnyja palažeńni',
+      'privacy.1.p1': 'Hetaja Palityka kanfidecyjnaści (daliiej — Palityka) vyznačaje paradak apračoŭki i abaronу perasanalnych danychaŭ karystalnikaŭ prahr. asiarodku «Trackly» (daliiej — Prahramny asiarodak, Trackly).',
+      'privacy.1.p2': 'Uładanik i apieratar Prahramnaha asiarodku — fizyčnaja asoba Kunin Jarasłaŭ Vadzimavič, 24.04.2009 n. (daliiej — Apieratar).',
+      'privacy.1.p3': 'Ustalioŭvajučy Trackly, prachodziačy rehistracyju i/abo praciahoŭvajučy vykarystańnie, Karystalnik pacviardžaje, što aznajoŭsiŭsia z hetaj Palitykaj i zhodaŭsia z jaje ŭmovami. Pry niazhodzie z Palitykaj Karystalnik pavinien spynić vykarystańnie Trackly.',
+      'privacy.2.title': '2. Pravoŭnyja padstavy apračoŭki perasanalnych danychaŭ',
+      'privacy.2.p1': 'Apieratar apračoŭvaje perasanalnyja danyja Karystalnika na padstave:',
+      'privacy.2.li1': 'dabraachoćnaj zhodы Karystalnika, jaka vyražaiecca pry rehistracyi (checkbox i knopka rehistracyi/praciahu);',
+      'privacy.2.li2': 'nieabchodnaści vykanańnia funkcyj Trackly pa ініcyjatyvie Karystalnika (dźiunnik, spraŭazdačy, apaviaščeńni);',
+      'privacy.2.li3': 'inšych padstaŭ, pra­dvu­džanych prymianalnym zakana­daŭstvam.',
+      'privacy.3.title': '3. Sklad apračoŭvanych perasanalnych danychaŭ',
+      'privacy.3.p1': 'Pry rehistracyi i vykarystańni Trackly Apieratar moža apračoŭvać nastupnyja katehoryi perasanalnych danychaŭ:',
+      'privacy.3.li1': 'prouzvišča, imia, imia pa-baćku;',
+      'privacy.3.li2': 'adras eliektronnaj pošty;',
+      'privacy.3.li3': 'numar tieliefona (kali jon paznačany);',
+      'privacy.3.li4': 'danyja pra pryipadki epilėpsii (data i čas, typ, praciahłaść, mahčymyja tryhery, kamientary i inšyja źviestki, jakija Karystalnik uносіć dobravarotna);',
+      'privacy.3.li5': 'danyja pra miedykamentoznuju tėrapiju (nazva praparatu, dozіroŭka, schiema pryjomu, fakty pryjoma);',
+      'privacy.3.li6': 'zapisу pra samaadčućcio, pabočnyja efekty i inšyja subjektyŭnyja stany;',
+      'privacy.3.li7': 'danyja pra avertujnyja kantakty (imie i prouzvišča, adras el. pošty, inšyja kantakty);',
+      'privacy.3.li8': 'techničnyja danyja: typ i viersija AP, viersija prykladannia, čas dostupu, sysijanyja ID i padobnaje.',
+      'privacy.3.p2': 'Uvodziačy danyja trecich asob (naprykład, avertujnych kantaktaŭ), Karystalnik pacviardžaje, što atrymaŭ ich zhodu na pradaču ich danychaŭ Apierataru i atrymańnie avertujnych paviedamleńniaŭ.',
+      'privacy.4.title': '4. Mety apračoŭki perasanalnych danychaŭ',
+      'privacy.4.p1': 'Perasanalnyja danyja apračoŭvajucca z nastupnymi mětami:',
+      'privacy.4.li1': 'rehistracyja Karystalnika i prada­staŭleńnie dostupu da funkcyj Trackly;',
+      'privacy.4.li2': 'viadzieńnie asabistaга dźiunnika pryipadkaŭ, tėrapii i samaadčućcia;',
+      'privacy.4.li3': 'analiz dynami­ki zdaroŭja ŭ ramkach funkcyj Trackly;',
+      'privacy.4.li4': 'farmiravańnie spraŭazdač dla pradačy lěkaraŭ albo inšaha vykarystańnia pa vyba­ru Karystalnika;',
+      'privacy.4.li5': 'adasyłańnie avertujnych apaviaščeńniaŭ na adrasy avertujnych kantaktaŭ;',
+      'privacy.4.li6': 'zabiespiačeńnie techničnaj pracazdoľnaści, biaśpieki i paliapšeńnie Trackly;',
+      'privacy.4.li7': 'supra­coŭniańnie z Karystalnikam pa pytanni pracy Trackly (padrabiaznyja adkazy, važnyja abnoŭleńni).',
+      'privacy.4.p2': 'Trackly nie źjaŭlajecca miedycynskim vyrobam ci dyjahnostyčnym srodkam. Usie miedycynskija rašeńni Karystalnik prymaje razam z kvalifikavanym uračom.',
+      'privacy.5.title': '5. Infrastrukcyja i miesca apračoŭki danychaŭ',
+      'privacy.5.p1': 'Trackly vykarystoŭvaje vonkavuju chmurnuju infrastrukturu. Asnoŭnyja kam­panenty:',
+      'privacy.5.th1': 'Kam­panent',
+      'privacy.5.th2': 'Pastauš­čyk',
+      'privacy.5.th3': 'Pryznačeńnie',
+      'privacy.5.row1.col1': 'Baza danychaŭ',
+      'privacy.5.row1.col2': 'Supabase PostgreSQL (AWS eu-west-1), Irlandyja',
+      'privacy.5.row1.col3': 'Zachoŭvańnie perasanalnych danychaŭ Karystalnikaŭ',
+      'privacy.5.row2.col1': 'Pacho­daja pošta',
+      'privacy.5.row2.col2': 'Resend (AWS eu-west-1), Irlandyja',
+      'privacy.5.row2.col3': 'Dastaŭka tranzakcyjnaj i avertujnaj eliektronnaj pošty',
+      'privacy.5.row3.col1': 'Damen',
+      'privacy.5.row3.col2': 'hoster.by, Respublika Biełaruś',
+      'privacy.5.row3.col3': 'Rehistracyja i absluhoŭvańnie damena tracklyapp.xyz',
+      'privacy.5.row4.col1': 'DNS i veryfikacyja damena',
+      'privacy.5.row4.col2': 'Cloudflare DNS',
+      'privacy.5.row4.col3': 'Publicznyja DNS-zapіsy dla veryfikacyi i zviazi damenu z paštovaj infrastruktury Resend',
+      'privacy.5.p2': 'Baza danychaŭ Supabase PostgreSQL znachodzicca za miežami Respublіki Biełaruś, u data-centrach, jakija abraŭ Supabase. Dakładnaje miesca zaležyć ad naładaŭ prajekta Supabase.',
+      'privacy.5.p3': 'Infrastrukcyja Resend takož znachodzicca pa-za miežami Biełarusi. Damen tracklyapp.xyz rehistravany ŭ hoster.by, DNS absluhoŭvaje Cloudflare.',
+      'privacy.6.title': '6. Apračoŭka i abaronа perasanalnych danychaŭ',
+      'privacy.6.p1': 'Apračoŭka danychaŭ vyko­n­vajecca z i biez au­tamatyzacyi z vykary­stańnem techničnych i arhanіzacyjnych mier, jakija adpaviedajuć chа­raktarу danychaŭ.',
+      'privacy.6.p2': 'Apieratar zdziaj­sniaje zbir, zapis, sistėmatyzacyju, nazapašvańnie, zachoŭvańnie, aktualizacyju, karėhuvańnie, vydvikanie, vykarystańnie, abiazličvańnie, blakavаńnie, vydaleńnie i zniščeńnie perasanalnych danychaŭ.',
+      'privacy.6.p3': 'Dostup da danychaŭ majuć Karystalnik (praz svoj akaŭnt ŭ Trackly) i Apieratar ŭ ab’jomie, jakі nieabchodny dla raspra­coŭki i padtrymki sėrvisu.',
+      'privacy.7.title': '7. Piera­dacha danychaŭ trecim asobam',
+      'privacy.7.p1': 'Perasanalnyja danyja mohuć być pieradadzieny trecim asobam ŭ nastupnych vypadkaŭ:',
+      'privacy.7.li1': 'pa pramym raspažadžeńni ci z jasnaj zhodы Karystalnika (naprykład, pry ekspartě spraŭazdačy dla lěkara);',
+      'privacy.7.li2': 'pačas dasylańnia avertujnych apaviaščeńniaŭ avertujnym kantaktam;',
+      'privacy.7.li3': 'pry vykarystańni chmurnych sėrvisaŭ, nieabchodnych dla pracy Trackly (Supabase, Resend i inš.) ŭ ramkach damoŭ z pastauš­čykami;',
+      'privacy.7.li4': 'kali heta vymahajecca zakana­daŭstvam.',
+      'privacy.7.p2': 'Avertujnyja apaviaščeńni farmirujuc­ca na padstave danychaŭ, jakija Karystalnik uvodzić ŭ Trackly, i dasy­lajucca z adrasu alerts@mail.tracklyapp.xyz.',
+      'privacy.7.p3': 'Apieratar nie pradaje i nie pieradadzie perasanalnyja danyja Karystalnikaŭ trecim asobam u kamercyjnych mėtach.',
+      'privacy.8.title': '8. Tėrminy zachoŭvańnia perasanalnych danychaŭ',
+      'privacy.8.p1': 'Perasanalnyja danyja zachoŭvajucca, pakul Karystalnik vykarystoŭvaje Trackly, i nekatory čas paslia hetaha, kali heta nieabchodna dla:',
+      'privacy.8.li1': 'vykanańnia abaviazkaŭ Apieratara periad Karystalnikam;',
+      'privacy.8.li2': 'vykanańnia zakana­daučych vymahańniaŭ;',
+      'privacy.8.li3': 'abarony pravoŭ i zakonnych інtarėsaŭ Apieratara.',
+      'privacy.8.p2': 'Paslia da­si­ahnieńnia mietaŭ apračoŭki albo ад­klіkańnia zhodы danyja vydalajucca albo abiazličvajucca ŭ razonny tėrmin.',
+      'privacy.9.title': '9. Pravy Karystalnika',
+      'privacy.9.p1': 'Karystalnik maje prava:',
+      'privacy.9.li1': 'atrymlivać infarmacyju pra svojja danyja i paradak ich apračoŭki;',
+      'privacy.9.li2': 'patrabavać abnaŭleńnia albo vypravańnia danychaŭ;',
+      'privacy.9.li3': 'patrabavać vydaleńnia danychaŭ pry adsutnaści zakonych padstaŭ dalej apračoŭvać ich;',
+      'privacy.9.li4': 'adklikać ranniej dadzienuju zhodu na apračoŭku;',
+      'privacy.9.li5': 'napi­svać zvaroty i piera­davać piare­čańni ščoda apračoŭki danychaŭ.',
+      'privacy.9.p2': 'Kab skari­stacca hetymi pravamі, možna napisać na: jaraslaukunin@gmail.com (tėma «Perasanalnyja danyja Trackly»).',
+      'privacy.10.title': '10. Adklikańnie zhodы na apračoŭku',
+      'privacy.10.p1': 'Karystalnik moža ŭ luby čas adklikać zhodu na apračoŭku perasanalnych danychaŭ, dasyłaŭšy list z paznakaj «Adklikańnie zhodы na apračoŭku perasanalnych danychaŭ» na jaraslaukunin@gmail.com.',
+      'privacy.10.p2': 'Paslia adtrymańnia adklikańnia Apieratar spyniaje apračoŭku danychaŭ, akramia vypadkaŭ, kali zachoŭvańnie abaviazana zakonaм ci nieabchodna dlia abarony pravoŭ Apieratara. Danyja vydalajucca albo abiazličvajucca ŭ razonny tėrmin.',
+      'privacy.11.title': '11. Zmieny Palityki kanfidecyjnaści',
+      'privacy.11.p1': 'Apieratar moža zmianić hetuju Palityku. Aktualnaja viersija dastupnaja razam z dakumienta­cyjaj na Trackly abo pad­nosecca Karystalniku іnšym sposabam.',
+      'privacy.11.p2': 'Novaja redakcyja ŭstupaje ŭ siłu z momantu apublikavańnia, kali inšaje nie paznačana. Praciahoŭvajučy vykarystoŭvać Trackly, Karystalnik zhodaŭvajecca z abnoŭlenaj Palitykaj.',
+      'privacy.12.title': '12. Kantakty Apieratara',
+      'privacy.12.p1': 'Apieratar: Kunin Jarasłaŭ Vadzimavič.',
+      'privacy.12.p2': 'Kantakt і pytanni pra perasanalnyja danyja: jaraslaukunin@gmail.com, tracklyapp.xyz.'
+    }
+  };
+
+  function applyPrivacyLang(lang) {
+    const dict = privacyDict[lang] || privacyDict.ru;
+    document.documentElement.lang = (lang === 'by' || lang === 'be') ? 'be' : lang;
+    const titleEl = document.querySelector('title[data-i18n="privacy.pageTitle"]');
+    if (dict['privacy.pageTitle']) {
+      titleEl.textContent = dict['privacy.pageTitle'];
+      document.title = dict['privacy.pageTitle'];
+    }
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      if (dict[key]) el.textContent = dict[key];
+    });
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.lang === lang);
+    });
+    localStorage.setItem('trackly-lang', lang);
+  }
+
+  const saved = localStorage.getItem('trackly-lang') || 'ru';
+  applyPrivacyLang(saved);
+
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.addEventListener('click', () => applyPrivacyLang(btn.dataset.lang));
+  });
+</script>
+</body>
+</html>
